@@ -8,6 +8,6 @@ class EditProfile extends Component
 {
     public function render()
     {
-        return view('livewire.edit-profile');
+        return view('livewire.edit-profile')->extends('layouts.app')->section('content');
     }
 }

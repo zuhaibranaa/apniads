@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('description');
             $table->string('brand');
             $table->string('model');
-            $table->integer('health',3);
+            $table->integer('health');
             $table->boolean('condition');
             $table->boolean('status')->default(false);
             $table->string('location');

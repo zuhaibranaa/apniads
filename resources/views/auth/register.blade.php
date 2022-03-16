@@ -15,8 +15,7 @@
                             <fieldset class="p-4">
                                 <input type="text" placeholder="Name*" class="border p-3 w-100 my-2 @error('name') is-invalid @enderror" id="name" name="name" required autofocus>
                                 <input type="email" id="email" name="email" required placeholder="Email*" class="border p-3 w-100 my-2 @error('email') is-invalid @enderror">
-                                <input type="text" id="phone" name="phone" required placeholder="Phone*" class="border p-3 w-100 my-2">
-                                Image : <input type="file" id="image" value='Image' name="image" required class="border p-3 w-100 my-2">
+                                <input type="text" id="phone" name="phone" required placeholder="Phone*" class="border p-3 w-100 my-2 @error('phone') is-invalid @enderror">
                                 <input type="password" id="password" name="password" placeholder="Password*" class="border p-3 w-100 my-2 @error('password') is-invalid @enderror" required>
                                 <input type="password" placeholder="Confirm Password*" name="password_confirmation" id="password-confirm" required class="border p-3 w-100 my-2">
                                 <div class="loggedin-forgot d-inline-flex my-3">

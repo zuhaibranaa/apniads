@@ -45,7 +45,7 @@
                         @if (Route::has('register'))
 
                         <li class="nav-item">
-                            <a class="nav-link text-white add-button" href=""><i class="fa fa-plus-circle"></i> Add Listing</a>
+                            <a class="nav-link text-white add-button" href="{{url('ad')}}"><i class="fa fa-plus-circle"></i> Add Listing</a>
                         </li>
                     </ul>
                         @endif
@@ -54,7 +54,7 @@
                         <ul class="navbar-nav ml-auto mt-10">
 
                             <li class="nav-item">
-                                <a class="nav-link text-white add-button" href=""><i class="fa fa-plus-circle"></i> Add Listing</a>
+                                <a class="nav-link text-white add-button" href="{{url('ad')}}"><i class="fa fa-plus-circle"></i> Add Listing</a>
                             </li>
                         <li class="nav-item">
                             <a class="nav-link text-white login-button bg-danger" href="{{ route('logout') }}" onclick="event.preventDefault();

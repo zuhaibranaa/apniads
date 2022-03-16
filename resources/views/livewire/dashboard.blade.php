@@ -14,7 +14,7 @@
               <!-- User Name -->
               <h5 class="text-center">{{$user['name']}}</h5>
               <p>Joined {{$user['created_at']}}</p>
-              <a href="user-profile.html" class="btn btn-main-sm">Edit Profile</a>
+              <a href="{{url('profile/edit')}}" class="btn btn-main-sm">Edit Profile</a>
             </div>
             <!-- Dashboard Links -->
             <div class="widget user-dashboard-menu">
@@ -80,7 +80,7 @@
                   <tr>
 
                     <td class="product-thumb">
-                      <img width="80px" height="auto" src="{{storage($ad['image'])}}" alt="image description"></td>
+                      <img width="80px" height="auto" src={{asset('images/'.$ad['images'])}} alt="image description"></td>
                     <td class="product-details">
                       <h3 class="title">{{$ad['title']}}</h3>
                       <span class="add-id"><strong>Ad ID:</strong> {{$ad['id']}}</span>
