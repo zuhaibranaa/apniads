@@ -17,13 +17,16 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('description');
-            $table->boolean('condition')->default(False);
+            $table->string('brand');
+            $table->string('model');
+            $table->integer('health',3);
+            $table->boolean('condition');
+            $table->boolean('status')->default(false);
             $table->string('location');
             $table->string('specifications');
             $table->integer('price');
             $table->string('images');
             $table->boolean('is_negotiable')->default(False);
-            $table->boolean('condition');
             $table->unsignedBigInteger('seller_id');
             $table->unsignedBigInteger('category_id');
             $table->foreign('seller_id')->references('id')->on('users')->onDelete('cascade');

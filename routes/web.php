@@ -1,7 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Livewire\Index;
+use App\Http\Controllers\AdController;
+use App\Http\Livewire\Dashboard;
+use App\Http\Livewire\CreateListing;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,10 +16,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
+Route::get('/', Index::class);
+Route::middleware('auth')->get('/dashboard', Dashboard::class);
+Route::middleware('auth')->get('ad', CreateListing::class);
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
