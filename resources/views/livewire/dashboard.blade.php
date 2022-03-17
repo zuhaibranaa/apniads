@@ -93,7 +93,7 @@
                       <div class="">
                         <ul class="list-inline justify-content-center">
                           <li class="list-inline-item">
-                            <a data-toggle="tooltip" data-placement="top" title="view" class="view" href="category.html">
+                            <a data-toggle="tooltip" data-placement="top" title="view" class="view" href="{{url('ad/'.$ad['id'])}}">
                               <i class="fa fa-eye"></i>
                             </a>
                           </li>
@@ -102,8 +102,12 @@
                               <i class="fa fa-pencil"></i>
                             </a>
                           </li>
+                        <form id="delete-{{$ad['id']}}" action="{{url('ad/'.$ad['id'])}}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                        </form>
                           <li class="list-inline-item">
-                            <a class="delete" data-toggle="tooltip" data-placement="top" title="Delete" href="">
+                            <a class="delete" onclick="document.getElementById('delete-{{$ad['id']}}').submit()" data-toggle="tooltip" data-placement="top" title="Delete">
                               <i class="fa fa-trash"></i>
                             </a>
                           </li>

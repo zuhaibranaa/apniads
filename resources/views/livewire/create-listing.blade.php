@@ -1,6 +1,8 @@
+@extends('layouts.app')
+@section('content')
 <section >
     <div class="container">
-        <form action="#">
+        <form method="POST" action="{{url('ad')}}">
             @csrf
             <!-- Post Your ad start -->
             <fieldset class="border border-gary p-4 mb-5">
@@ -74,7 +76,7 @@
                                     <span class="d-block">or</span>
                                     <span class="d-block btn bg-primary text-white my-3 select-files">Select files</span>
                                     <span class="d-block">Maximum upload file size: 500 KB</span>
-                                    <input type="file" class="form-control-file d-none" id="file-upload" name="file">
+                                    <input type="file" multiple class="form-control-file d-none" id="file-upload" name="file">
                                 </label>
                             </div>
                         </div>
@@ -86,7 +88,7 @@
             <div class="checkbox d-inline-flex">
                 <input type="checkbox" id="terms-&amp;-condition" class="mt-1">
                 <label for="terms-&amp;-condition" class="ml-2">By click you must agree with our
-                    <span> <a class="text-success" href="terms-condition.html">Terms &amp; Condition and Posting Rules.</a></span>
+                    <span> <a class="text-success" href="#">Terms &amp; Condition and Posting Rules.</a></span>
                 </label>
             </div>
             <button type="submit" class="btn btn-primary d-block mt-2">Post Your Ad</button>
@@ -94,3 +96,4 @@
     </div>
 </section>
 <br/>
+@endsection

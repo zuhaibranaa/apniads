@@ -25,6 +25,7 @@
   <link href="{{asset('css/plugins/jquery-nice-select/css/nice-select.css')}}" rel="stylesheet">
   <!-- CUSTOM CSS -->
   <link href="{{asset('css/style.css')}}" rel="stylesheet">
+  @yield('css')
 </head>
 
 <body class="body-wrapper">

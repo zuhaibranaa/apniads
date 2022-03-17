@@ -1,10 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Ad;
-use Illuminate\Http\Request;
 
-class AdController extends Controller
+use App\Http\Requests\StoreChatRequest;
+use App\Http\Requests\UpdateChatRequest;
+use App\Models\Chat;
+use App\Models\User;
+
+class ChatController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,8 +16,10 @@ class AdController extends Controller
      */
     public function index()
     {
-        $ads = Ad::all();
-        return view('livewire.all-ads')->with('ads',$ads);
+        $chats = Chat::all()->where(function($q){
+            $q->where('from_user','=',auth()->user()->id)->orWhere('to_user','=',auth()->user()->id);
+          });
+        return view('livewire.chats')->with('chats',$chats);
     }
 
     /**
@@ -24,16 +29,16 @@ class AdController extends Controller
      */
     public function create()
     {
-        return view('livewire.create-listing');
+        //
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\StoreChatRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreChatRequest $request)
     {
         //
     }
@@ -41,21 +46,21 @@ class AdController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Chat  $chat
      * @return \Illuminate\Http\Response
      */
-    public function show(Ad $ad)
+    public function show(Chat $chat)
     {
-        return view('livewire.single-ad')->with('ad', $ad);
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Chat  $chat
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Chat $chat)
     {
         //
     }
@@ -63,11 +68,11 @@ class AdController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Http\Requests\UpdateChatRequest  $request
+     * @param  \App\Models\Chat  $chat
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,Ad $ad)
+    public function update(UpdateChatRequest $request, Chat $chat)
     {
         //
     }
@@ -75,12 +80,11 @@ class AdController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Chat  $chat
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Ad $ad)
+    public function destroy(Chat $chat)
     {
-        $ad->delete();
-        return redirect()->back();
+        //
     }
 }

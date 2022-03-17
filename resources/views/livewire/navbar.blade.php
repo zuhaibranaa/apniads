@@ -12,23 +12,23 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav ml-auto main-nav ">
-                            <li class="nav-item active">
+                            <li class="nav-item {{Request::is('/') ? 'active' : ''}}">
                                 <a class="nav-link" href="/">Home</a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item {{Request::is('dashboard') ? 'active' : ''}}">
                                 <a class="nav-link" href="{{url('dashboard')}}">Dashboard</a>
                             </li>
-                            <li class="nav-item ">
-                                <a class="nav-link" href="">All Ads</a>
+                            <li class="nav-item {{Request::is('ad') ? 'active' : ''}}">
+                                <a class="nav-link" href="{{url('ad')}}">All Ads</a>
                             </li>
-                            <li class="nav-item ">
-                                <a class="nav-link" href="">Chats</a>
+                            <li class="nav-item {{Request::is('chat') ? 'active' : ''}}">
+                                <a class="nav-link" href="{{url('chat')}}">Chats</a>
                             </li>
-                            <li class="nav-item ">
-                                <a class="nav-link" href="">About Us</a>
+                            <li class="nav-item {{Request::is('about-us') ? 'active' : ''}}">
+                                <a class="nav-link" href="{{url('about-us')}}">About Us</a>
                             </li>
-                            <li class="nav-item ">
-                                <a class="nav-link" href="">Contact Us</a>
+                            <li class="nav-item {{Request::is('contact-us') ? 'active' : ''}}">
+                                <a class="nav-link" href="{{url('contact-us')}}">Contact Us</a>
                             </li>
                         </ul>
 
@@ -45,7 +45,7 @@
                         @if (Route::has('register'))
 
                         <li class="nav-item">
-                            <a class="nav-link text-white add-button" href="{{url('ad')}}"><i class="fa fa-plus-circle"></i> Add Listing</a>
+                            <a class="nav-link text-white add-button" href="{{url('ad/create')}}"><i class="fa fa-plus-circle"></i> Add Listing</a>
                         </li>
                     </ul>
                         @endif
@@ -54,7 +54,7 @@
                         <ul class="navbar-nav ml-auto mt-10">
 
                             <li class="nav-item">
-                                <a class="nav-link text-white add-button" href="{{url('ad')}}"><i class="fa fa-plus-circle"></i> Add Listing</a>
+                                <a class="nav-link text-white add-button" href="{{url('ad/create')}}"><i class="fa fa-plus-circle"></i> Add Listing</a>
                             </li>
                         <li class="nav-item">
                             <a class="nav-link text-white login-button bg-danger" href="{{ route('logout') }}" onclick="event.preventDefault();

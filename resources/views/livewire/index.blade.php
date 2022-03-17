@@ -11,18 +11,18 @@
                         <h2>Popular Category</h2>
                         <ul class="list-inline">
                             <li class="list-inline-item">
-                                <a href="#"><i class="fa fa-bed"></i> Hotel</a></li>
-                            <li class="list-inline-item">
-                                <a href="#"><i class="fa fa-grav"></i> Fitness</a>
+                                <a href="{{url('ad')}}"><i class="fa fa-bed"></i> Hotel</a></li>
+                                <li class="list-inline-item">
+                                <a href="{{url('ad')}}"><i class="fa fa-grav"></i> Fitness</a>
                             </li>
                             <li class="list-inline-item">
-                                <a href="#"><i class="fa fa-car"></i> Cars</a>
+                                <a href="{{url('ad')}}"><i class="fa fa-car"></i> Cars</a>
                             </li>
                             <li class="list-inline-item">
-                                <a href="#"><i class="fa fa-cutlery"></i> Restaurants</a>
+                                <a href="{{url('ad')}}"><i class="fa fa-cutlery"></i> Restaurants</a>
                             </li>
                             <li class="list-inline-item">
-                                <a href="#"><i class="fa fa-coffee"></i> Cafe</a>
+                                <a href="{{url('ad')}}"><i class="fa fa-coffee"></i> Cafe</a>
                             </li>
                         </ul>
                     </div>
@@ -84,18 +84,18 @@
     <div class="card">
         <div class="thumb-content">
             <!-- <div class="price">$200</div> -->
-            <a href="#">
+            <a href="{{url('ad/'.$ad['id'])}}">
                 <img class="card-img-top img-fluid" src="images/{{$ad['images']}}" alt="Card image cap">
             </a>
         </div>
         <div class="card-body">
-            <h4 class="card-title"><a href="single.html">{{$ad['title']}}</a></h4>
+            <h4 class="card-title"><a href="{{url('ad/'.$ad['id'])}}">{{$ad['title']}}</a></h4><span class="bg-warning text-white">Rs. {{$ad['price']}}</span>
             <ul class="list-inline product-meta">
                 <li class="list-inline-item">
-                    <a href="single.html"><i class="fa fa-folder-open-o"></i>{{App\Models\Category::find($ad['category_id'])['name']}}</a>
+                    <a href="{{url('ad/'.$ad['id'])}}"><i class="fa fa-folder-open-o"></i>{{App\Models\Category::find($ad['category_id'])['name']}}</a>
                 </li>
                 <li class="list-inline-item">
-                    <a href="#"><i class="fa fa-calendar"></i>{{$ad['created_at']}}</a>
+                    <a href="{{url('ad/'.$ad['id'])}}"><i class="fa fa-calendar"></i>{{$ad['created_at']}}</a>
                 </li>
             </ul>
             <p class="card-text">{{$ad['description']}}</p>
