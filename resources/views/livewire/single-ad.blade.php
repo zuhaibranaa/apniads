@@ -1,32 +1,6 @@
 @extends('layouts.app')
 @section('content')
 <section class="page-search">
-	<div class="container">
-		<div class="row">
-			<div class="col-md-12">
-				<!-- Advance Search -->
-				<div class="advance-search">
-					<form>
-						<div class="form-row">
-							<div class="form-group col-md-4">
-								<input type="text" class="form-control my-2 my-lg-0" id="inputtext4" placeholder="What are you looking for">
-							</div>
-							<div class="form-group col-md-3">
-								<input type="text" class="form-control my-2 my-lg-0" id="inputCategory4" placeholder="Category">
-							</div>
-							<div class="form-group col-md-3">
-								<input type="text" class="form-control my-2 my-lg-0" id="inputLocation4" placeholder="Location">
-							</div>
-							<div class="form-group col-md-2">
-
-								<button type="submit" class="btn btn-primary">Search Now</button>
-							</div>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
 </section>
 <!--===================================
 =            Store Section            =
@@ -161,7 +135,7 @@
 							your fellow users.
 						</p>
 						<!-- Submii button -->
-						<a href="" class="btn btn-transparent-white">Submit Listing</a>
+						<a href="{{url('ad/create')}}" class="btn btn-transparent-white">Submit Listing</a>
 					</div>
 
 				</div>

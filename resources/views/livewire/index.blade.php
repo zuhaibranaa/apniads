@@ -37,11 +37,11 @@
                                                     <input type="text" class="form-control my-2 my-lg-1" id="inputtext4" placeholder="What are you looking for">
                                                 </div>
                                                 <div class="form-group col-md-3">
-                                                    <select class="w-100 form-control mt-lg-1 mt-md-2">
+                                                    <select onchange="location.href='category/'+this.value" class="w-100 form-control mt-lg-1 mt-md-2">
                                                         <option>Category</option>
-                                                        <option value="1">Top rated</option>
-                                                        <option value="2">Lowest Price</option>
-                                                        <option value="4">Highest Price</option>
+                                                        @foreach (\App\Models\Category::all() as $category)
+                                                        <option value="{{$category['id']}}">{{$category['name']}}</option>
+                                                        @endforeach
                                                     </select>
                                                 </div>
                                                 <div class="form-group col-md-3">
@@ -134,10 +134,10 @@
                                 <h4>Electronics <span>{{count(App\Models\Ad::all()->where('category_id', '=' , '1'))}}</span></h4>
                             </div>
                             <ul class="category-list" >
-                                <li><a href="#">Laptops <span>{{count(App\Models\Ad::all()->where('category_id', '=' , '2'))}}</span></a></li>
-                                <li><a href="#">Mobiles <span>{{count(App\Models\Ad::all()->where('category_id', '=' , '3'))}}</span></a></li>
-                                <li><a href="#">Tablets  <span>{{count(App\Models\Ad::all()->where('category_id', '=' , '4'))}}</span></a></li>
-                                <li><a href="#">Other Electronics <span>{{count(App\Models\Ad::all()->where('category_id', '=' , '5'))}}</span></a></li>
+                                <li><a href="{{url('category/2')}}">Laptops <span>{{count(App\Models\Ad::all()->where('category_id', '=' , '2'))}}</span></a></li>
+                                <li><a href="{{url('category/3')}}">Mobiles <span>{{count(App\Models\Ad::all()->where('category_id', '=' , '3'))}}</span></a></li>
+                                <li><a href="{{url('category/4')}}">Tablets  <span>{{count(App\Models\Ad::all()->where('category_id', '=' , '4'))}}</span></a></li>
+                                <li><a href="{{url('category/5')}}">Other Electronics <span>{{count(App\Models\Ad::all()->where('category_id', '=' , '5'))}}</span></a></li>
                             </ul>
                         </div>
                     </div> <!-- /Category List -->
@@ -149,10 +149,10 @@
                                 <h4>Restaurants <span>{{count(App\Models\Ad::all()->where('category_id', '=' , '6'))}}</span></h4>
                             </div>
                             <ul class="category-list" >
-                                <li><a href="#">Cafe <span>{{count(App\Models\Ad::all()->where('category_id', '=' , '7'))}}</span></a></li>
-                                <li><a href="#">Fast food <span>{{count(App\Models\Ad::all()->where('category_id', '=' , '8'))}}</span></a></li>
-                                <li><a href="#">Restaurants  <span>{{count(App\Models\Ad::all()->where('category_id', '=' , '9'))}}</span></a></li>
-                                <li><a href="#">Food Track<span>{{count(App\Models\Ad::all()->where('category_id', '=' , '10'))}}</span></a></li>
+                                <li><a href="{{url('category/7')}}">Cafe <span>{{count(App\Models\Ad::all()->where('category_id', '=' , '7'))}}</span></a></li>
+                                <li><a href="{{url('category/8')}}">Fast food <span>{{count(App\Models\Ad::all()->where('category_id', '=' , '8'))}}</span></a></li>
+                                <li><a href="{{url('category/9')}}">Restaurants  <span>{{count(App\Models\Ad::all()->where('category_id', '=' , '9'))}}</span></a></li>
+                                <li><a href="{{url('category/10')}}">Food Track<span>{{count(App\Models\Ad::all()->where('category_id', '=' , '10'))}}</span></a></li>
                             </ul>
                         </div>
                     </div> <!-- /Category List -->
@@ -164,10 +164,10 @@
                                 <h4>Real Estate <span>{{count(App\Models\Ad::all()->where('category_id', '=' , '11'))}}</span></h4>
                             </div>
                             <ul class="category-list" >
-                                <li><a href="#">Farms <span>{{count(App\Models\Ad::all()->where('category_id', '=' , '12'))}}</span></a></li>
-                                <li><a href="#">Gym <span>{{count(App\Models\Ad::all()->where('category_id', '=' , '13'))}}</span></a></li>
-                                <li><a href="#">Hospitals  <span>{{count(App\Models\Ad::all()->where('category_id', '=' , '14'))}}</span></a></li>
-                                <li><a href="#">Parolurs <span>{{count(App\Models\Ad::all()->where('category_id', '=' , '15'))}}</span></a></li>
+                                <li><a href="{{url('category/12')}}">Farms <span>{{count(App\Models\Ad::all()->where('category_id', '=' , '12'))}}</span></a></li>
+                                <li><a href="{{url('category/13')}}">Gym <span>{{count(App\Models\Ad::all()->where('category_id', '=' , '13'))}}</span></a></li>
+                                <li><a href="{{url('category/14')}}">Hospitals  <span>{{count(App\Models\Ad::all()->where('category_id', '=' , '14'))}}</span></a></li>
+                                <li><a href="{{url('category/15')}}">Parolurs <span>{{count(App\Models\Ad::all()->where('category_id', '=' , '15'))}}</span></a></li>
                             </ul>
                         </div>
                     </div> <!-- /Category List -->
@@ -179,10 +179,10 @@
                                 <h4>Apparels & Clothing <span>{{count(App\Models\Ad::all()->where('category_id', '=' , '16'))}}</span></h4>
                             </div>
                             <ul class="category-list" >
-                                <li><a href="#">Mens Wears <span>{{count(App\Models\Ad::all()->where('category_id', '=' , '17'))}}</span></a></li>
-                                <li><a href="#">Accessories <span>{{count(App\Models\Ad::all()->where('category_id', '=' , '18'))}}</span></a></li>
-                                <li><a href="#">Kids Wears <span>{{count(App\Models\Ad::all()->where('category_id', '=' , '19'))}}</span></a></li>
-                                <li><a href="#">Womens Wear <span>{{count(App\Models\Ad::all()->where('category_id', '=' , '20'))}}</span></a></li>
+                                <li><a href="{{url('category/17')}}">Mens Wears <span>{{count(App\Models\Ad::all()->where('category_id', '=' , '17'))}}</span></a></li>
+                                <li><a href="{{url('category/18')}}">Accessories <span>{{count(App\Models\Ad::all()->where('category_id', '=' , '18'))}}</span></a></li>
+                                <li><a href="{{url('category/19')}}">Kids Wears <span>{{count(App\Models\Ad::all()->where('category_id', '=' , '19'))}}</span></a></li>
+                                <li><a href="{{url('category/20')}}">Womens Wear <span>{{count(App\Models\Ad::all()->where('category_id', '=' , '20'))}}</span></a></li>
                             </ul>
                         </div>
                     </div> <!-- /Category List -->
@@ -194,10 +194,10 @@
                                 <h4>Jobs <span>{{count(App\Models\Ad::all()->where('category_id', '=' , '21'))}}</span></h4>
                             </div>
                             <ul class="category-list" >
-                                <li><a href="#">It Jobs <span>{{count(App\Models\Ad::all()->where('category_id', '=' , '22'))}}</span></a></li>
-                                <li><a href="#">Cleaning & Washing <span>{{count(App\Models\Ad::all()->where('category_id', '=' , '23'))}}</span></a></li>
-                                <li><a href="#">Management  <span>{{count(App\Models\Ad::all()->where('category_id', '=' , '24'))}}</span></a></li>
-                                <li><a href="#">Voluntary Works <span>{{count(App\Models\Ad::all()->where('category_id', '=' , '25'))}}</span></a></li>
+                                <li><a href="{{url('category/22')}}">It Jobs <span>{{count(App\Models\Ad::all()->where('category_id', '=' , '22'))}}</span></a></li>
+                                <li><a href="{{url('category/23')}}">Cleaning & Washing <span>{{count(App\Models\Ad::all()->where('category_id', '=' , '23'))}}</span></a></li>
+                                <li><a href="{{url('category/24')}}">Management  <span>{{count(App\Models\Ad::all()->where('category_id', '=' , '24'))}}</span></a></li>
+                                <li><a href="{{url('category/25')}}">Voluntary Works <span>{{count(App\Models\Ad::all()->where('category_id', '=' , '25'))}}</span></a></li>
                             </ul>
                         </div>
                     </div> <!-- /Category List -->
@@ -209,10 +209,10 @@
                                 <h4>Vehicles <span>{{count(App\Models\Ad::all()->where('category_id', '=' , '26'))}}</span></h4>
                             </div>
                             <ul class="category-list" >
-                                <li><a href="#">Buses <span>{{count(App\Models\Ad::all()->where('category_id', '=' , '27'))}}</span></a></li>
-                                <li><a href="#">Cars <span>{{count(App\Models\Ad::all()->where('category_id', '=' , '28'))}}</span></a></li>
-                                <li><a href="#">Motobikes  <span>{{count(App\Models\Ad::all()->where('category_id', '=' , '29'))}}</span></a></li>
-                                <li><a href="#">Other Vehicles <span>{{count(App\Models\Ad::all()->where('category_id', '=' , '30'))}}</span></a></li>
+                                <li><a href="{{url('category/27')}}">Buses <span>{{count(App\Models\Ad::all()->where('category_id', '=' , '27'))}}</span></a></li>
+                                <li><a href="{{url('category/28')}}">Cars <span>{{count(App\Models\Ad::all()->where('category_id', '=' , '28'))}}</span></a></li>
+                                <li><a href="{{url('category/29')}}">Motobikes  <span>{{count(App\Models\Ad::all()->where('category_id', '=' , '29'))}}</span></a></li>
+                                <li><a href="{{url('category/30')}}">Other Vehicles <span>{{count(App\Models\Ad::all()->where('category_id', '=' , '30'))}}</span></a></li>
                             </ul>
                         </div>
                     </div> <!-- /Category List -->
@@ -224,10 +224,10 @@
                                 <h4>Pets <span>{{count(App\Models\Ad::all()->where('category_id', '=' , '31'))}}</span></h4>
                             </div>
                             <ul class="category-list" >
-                                <li><a href="#">Cats <span>{{count(App\Models\Ad::all()->where('category_id', '=' , '32'))}}</span></a></li>
-                                <li><a href="#">Dogs <span>{{count(App\Models\Ad::all()->where('category_id', '=' , '33'))}}</span></a></li>
-                                <li><a href="#">Birds  <span>{{count(App\Models\Ad::all()->where('category_id', '=' , '34'))}}</span></a></li>
-                                <li><a href="#">Others <span>{{count(App\Models\Ad::all()->where('category_id', '=' , '35'))}}</span></a></li>
+                                <li><a href="{{url('category/32')}}">Cats <span>{{count(App\Models\Ad::all()->where('category_id', '=' , '32'))}}</span></a></li>
+                                <li><a href="{{url('category/33')}}">Dogs <span>{{count(App\Models\Ad::all()->where('category_id', '=' , '33'))}}</span></a></li>
+                                <li><a href="{{url('category/34')}}">Birds  <span>{{count(App\Models\Ad::all()->where('category_id', '=' , '34'))}}</span></a></li>
+                                <li><a href="{{url('category/35')}}">Others <span>{{count(App\Models\Ad::all()->where('category_id', '=' , '35'))}}</span></a></li>
                             </ul>
                         </div>
                     </div> <!-- /Category List -->
@@ -240,10 +240,10 @@
                                 <h4>Services <span>{{count(App\Models\Ad::all()->where('category_id', '=' , '36'))}}</span></h4>
                             </div>
                             <ul class="category-list" >
-                                <li><a href="#">Cleaning <span>{{count(App\Models\Ad::all()->where('category_id', '=' , '37'))}}</span></a></li>
-                                <li><a href="#">Car Washing <span>{{count(App\Models\Ad::all()->where('category_id', '=' , '38'))}}</span></a></li>
-                                <li><a href="#">Clothing  <span>{{count(App\Models\Ad::all()->where('category_id', '=' , '39'))}}</span></a></li>
-                                <li><a href="#">Business <span>{{count(App\Models\Ad::all()->where('category_id', '=' , '40'))}}</span></a></li>
+                                <li><a href="{{url('category/37')}}">Cleaning <span>{{count(App\Models\Ad::all()->where('category_id', '=' , '37'))}}</span></a></li>
+                                <li><a href="{{url('category/38')}}">Car Washing <span>{{count(App\Models\Ad::all()->where('category_id', '=' , '38'))}}</span></a></li>
+                                <li><a href="{{url('category/39')}}">Clothing  <span>{{count(App\Models\Ad::all()->where('category_id', '=' , '39'))}}</span></a></li>
+                                <li><a href="{{url('category/40')}}">Business <span>{{count(App\Models\Ad::all()->where('category_id', '=' , '40'))}}</span></a></li>
                             </ul>
                         </div>
                     </div> <!-- /Category List -->
@@ -265,8 +265,8 @@
                     <h2>Start today to get more exposure and
                     grow your business</h2>
                     <ul class="list-inline mt-30">
-                        <li class="list-inline-item"><a class="btn btn-main" href="ad-listing.html">Add Listing</a></li>
-                        <li class="list-inline-item"><a class="btn btn-secondary" href="category.html">Browser Listing</a></li>
+                        <li class="list-inline-item"><a class="btn btn-main" href="{{url('ad/create')}}">Add Listing</a></li>
+                        <li class="list-inline-item"><a class="btn btn-secondary" href="{{url('ad')}}">Browser Listing</a></li>
                     </ul>
                 </div>
             </div>

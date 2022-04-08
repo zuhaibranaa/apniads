@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ChatController;
+use App\Http\Controllers\CategoryController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,12 +21,13 @@ Route::get('/contact-us', App\Http\Livewire\ContactUs::class);
 Route::get('/about-us', App\Http\Livewire\AboutUs::class);
 Route::get('/', App\Http\Livewire\Index::class);
 Route::middleware('auth')->get('/dashboard', App\Http\Livewire\Dashboard::class);
-Route::middleware('auth')->resource('/ad', AdController::class);
+Route::resource('/ad', AdController::class);
 Route::middleware('auth')->resource('/chat', ChatController::class);
-Route::middleware('auth')->get('/createchat/{$id}', function ($id){
-    $user = App\Models\User::find($id);
-    return view('livewire.chats')->with('chats',$chats)->with('user',$user);
-});
+Route::resource('/category', CategoryController::class);
+// Route::middleware('auth')->get('/createchat/{$id}', function ($id){
+//     $user = App\Models\User::find($id);
+//     return view('livewire.chats')->with('chats',$chats)->with('user',$user);
+// });
 Route::middleware('auth')->resource('/profile', ProfileController::class);
 Auth::routes();
 
