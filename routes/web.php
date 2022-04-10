@@ -22,6 +22,7 @@ Route::get('/about-us', App\Http\Livewire\AboutUs::class);
 Route::get('/', App\Http\Livewire\Index::class);
 Route::middleware('auth')->get('/dashboard', App\Http\Livewire\Dashboard::class);
 Route::resource('/ad', AdController::class);
+Route::get('/search', [AdController::class, 'search'])->name('search');
 Route::middleware('auth')->resource('/chat', ChatController::class);
 Route::resource('/category', CategoryController::class);
 // Route::middleware('auth')->get('/createchat/{$id}', function ($id){
