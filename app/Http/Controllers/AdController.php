@@ -15,6 +15,10 @@ class AdController extends Controller
             'destroy'
         ]);
     }
+    public function search(Request $req)
+    {
+        $ads = Ad::all()->where('title');
+    }
     /**
      * Display a listing of the resource.
      *
