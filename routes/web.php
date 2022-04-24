@@ -39,6 +39,51 @@ Route::middleware('auth')->get('/dashboard/all-ads', function () {
         ->with('count', $count);
     }
 });
+Route::middleware('auth')->get('/dashboard/pending-ads', function () {
+    if(auth()->user()->is_admin){
+        $ads = App\Models\Ad::all();
+        $count = 0;
+        foreach ($ads as $ad) {
+            if ($ad['status'] == 0) {
+                $count++;
+            }
+        }
+        return view('livewire.dashboard-pending-ads')
+        ->with('ads',$ads)
+        ->with('user', auth()->user())
+        ->with('count', $count);
+    }
+});
+Route::middleware('auth')->get('/dashboard/delivered-orders', function () {
+    if(auth()->user()->is_admin){
+        $ads = App\Models\Ad::all();
+        $count = 0;
+        foreach ($ads as $ad) {
+            if ($ad['status'] == 0) {
+                $count++;
+            }
+        }
+        return view('livewire.dashboard-delivered-orders')
+        ->with('ads',$ads)
+        ->with('user', auth()->user())
+        ->with('count', $count);
+    }
+});
+Route::middleware('auth')->get('/dashboard/active-orders', function () {
+    if(auth()->user()->is_admin){
+        $ads = App\Models\Ad::all();
+        $count = 0;
+        foreach ($ads as $ad) {
+            if ($ad['status'] == 0) {
+                $count++;
+            }
+        }
+        return view('livewire.dashboard-active-orders')
+        ->with('ads',$ads)
+        ->with('user', auth()->user())
+        ->with('count', $count);
+    }
+});
 Route::middleware('auth')->resource('/wishlist', WishlistController::class);
 Route::middleware('auth')->resource('/cart', CartController::class);
 Route::middleware('auth')->resource('/order', OrderController::class);

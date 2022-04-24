@@ -1,6 +1,6 @@
 @extends('livewire.layouts.dashboard')
 @section('data')
-    <h3 class="widget-header">{{ Request::is('dashboard/all-ads') ? 'All Ads' : 'My Ads' }}</h3>
+    <h3 class="widget-header">Pending Ads</h3>
     <table class="table table-responsive product-dashboard-table">
         <thead>
             <tr>
@@ -42,8 +42,7 @@
                                         <i class="fa fa-pencil"></i>
                                     </a>
                                 </li>
-                                <form id="delete-{{ $ad['id'] }}" action="{{ url('ad/' . $ad['id']) }}"
-                                    method="POST">
+                                <form id="delete-{{ $ad['id'] }}" action="{{ url('ad/' . $ad['id']) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
                                 </form>

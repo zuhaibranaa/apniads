@@ -22,26 +22,29 @@
                         <div class="widget user-dashboard-menu">
                             <ul>
                                 <li class="{{ Request::is('dashboard') ? 'active' : '' }}"><a
-                                        href="{{ url('dashboard') }}"><i class="fa fa-user"></i> My Ads</a></li>
+                                        href="{{ url('dashboard') }}"><i class="fa fa-user"></i> My
+                                        Ads<span></span></a></li>
                                 <li class="{{ Request::is('order') ? 'active' : '' }}"><a href="{{ url('order') }}"><i
-                                            class="fa fa-shopping-basket"></i> My Orders</a></li>
+                                            class="fa fa-shopping-basket"></i> My Orders<span></span></a></li>
                                 <li class="{{ Request::is('wishlist') ? 'active' : '' }}"><a
-                                        href="{{ url('wishlist') }}"><i class="fa fa-shopping-cart"></i> My Wishlist</a>
+                                        href="{{ url('wishlist') }}"><i class="fa fa-shopping-cart"></i> My
+                                        Wishlist<span></span></a>
                                 </li>
                                 <li class="{{ Request::is('cart') ? 'active' : '' }}"><a href="{{ url('cart') }}"><i
-                                            class="fa fa-shopping-basket"></i> Cart</a></li>
+                                            class="fa fa-shopping-basket"></i> Cart<span></span></a></li>
                                 @if (auth()->user()->is_admin)
                                     <li class="{{ Request::is('dashboard/all-ads') ? 'active' : '' }}"><a
                                             href="{{ url('dashboard/all-ads') }}"><i class="fa fa fa-check-square-o"></i>
-                                            All Ads</a></li>
+                                            All Ads<span></span></a></li>
                                     <li class="{{ Request::is('dashboard/pending-ads') ? 'active' : '' }}"><a
                                             href="{{ url('dashboard/pending-ads') }}"><i class="fa fa-bolt"></i>
                                             Pending Ads<span></span></a></li>
-                                    <li class="{{ Request::is('dashboard/pending-ads') ? 'active' : '' }}"><a
-                                            href="{{ url('dashboard/pending-ads') }}"><i class="fa fa-shopping-cart"></i>
+                                    <li class="{{ Request::is('dashboard/active-orders') ? 'active' : '' }}"><a
+                                            href="{{ url('dashboard/active-orders') }}"><i
+                                                class="fa fa-shopping-cart"></i>
                                             Active Orders<span></span></a></li>
-                                    <li class="{{ Request::is('dashboard/pending-ads') ? 'active' : '' }}"><a
-                                            href="{{ url('dashboard/pending-ads') }}"><i
+                                    <li class="{{ Request::is('dashboard/delivered-orders') ? 'active' : '' }}"><a
+                                            href="{{ url('/dashboard/delivered-orders') }}"><i
                                                 class="fa fa-check-square-o fa-shoping-cart"></i> Delivered
                                             Orders<span></span></a></li>
                                 @endif
