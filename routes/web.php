@@ -19,7 +19,6 @@ use App\Http\Controllers\CategoryController;
 |
 */
 
-Route::get('/', App\Http\Livewire\Index::class);
 Route::get('/contact-us', App\Http\Livewire\ContactUs::class);
 Route::get('/about-us', App\Http\Livewire\AboutUs::class);
 Route::get('/', App\Http\Livewire\Index::class);

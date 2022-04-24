@@ -20,7 +20,8 @@
                     <td class="action" data-title="Action">
                         <div class="">
                             <ul class="list-inline justify-content-center">
-                                <form id="delete-{{ $wish->id }}" action="{{ url('ad/' . $wish->id) }}" method="POST">
+                                <form id="delete-{{ $wish->id }}" action="{{ url('wishlist/' . $wish->id) }}"
+                                    method="POST">
                                     @csrf
                                     @method('DELETE')
                                 </form>

@@ -28,11 +28,17 @@ class WishlistController extends Controller
      */
     public function store(StorewishlistRequest $request)
     {
-        $wishlist = new wishlist();
-        $wishlist['user_id'] = auth()->user()->id;
-        $wishlist['item_id'] = $request['item_id'];
-        $wishlist->save();
-        return $request;
+        $exist = wishlist::all()->where('item_id','=',$request['item_id']);
+        try {
+            $exist[0];
+            return redirect('wishlist');
+        } catch (\Throwable $th) {
+            $wishlist = new wishlist();
+            $wishlist['user_id'] = auth()->user()->id;
+            $wishlist['item_id'] = $request['item_id'];
+            $wishlist->save();
+            return redirect('wishlist');
+        }
     }
     /**
      * Remove the specified resource from storage.
