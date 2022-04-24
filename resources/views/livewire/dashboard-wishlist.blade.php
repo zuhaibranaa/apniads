@@ -80,9 +80,10 @@
                 </tr>
               </thead>
               <tbody>
-                <td class="product-category"><span class="categories">data</span></td>
-                <td class="product-category"><span class="categories">data</span></td>
-                <td class="action" data-title="Action">
+                  @foreach ($item as $wish)
+                  <td class="product-category"><span class="categories {{$ad = \App\Models\Ad::find($wish['item_id'])}}">{{$ad['name']}}</span></td>
+                  <td class="product-category"><span class="categories">{{$ad['price']}}</span></td>
+                  <td class="action" data-title="Action">
                     <div class="">
                       <ul class="list-inline justify-content-center">
                         <li class="list-inline-item">
@@ -107,6 +108,7 @@
                       </ul>
                     </div>
                   </td>
+                  @endforeach
               </tbody>
             </table>
 
