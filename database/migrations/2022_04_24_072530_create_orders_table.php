@@ -21,6 +21,7 @@ return new class extends Migration
             $table->integer('total_price');
             $table->date('order_date');
             $table->date('delivery_date');
+            $table->boolean('status')->default(false);
             $table->timestamps();
         });
     }
