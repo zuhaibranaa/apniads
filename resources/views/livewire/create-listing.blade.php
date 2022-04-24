@@ -12,32 +12,33 @@
                         </div>
                         <div class="col-lg-6">
                             <h6 class="font-weight-bold pt-4 pb-1">Title Of Ad:</h6>
-                            <input type="text" class="border w-100 p-2 bg-white text-capitalize"
+                            <input name="title" type="text" class="border w-100 p-2 bg-white text-capitalize"
                                 placeholder="Ad title go There">
                             <h6 class="font-weight-bold pt-4 pb-1">Health:</h6>
-                            <input type="range" step="10" min="0" max="100"
+                            <input type="range" name="health" step="10" min="0" max="100"
                                 class="border w-100 p-2 bg-white text-capitalize">
 
                             <h6 class="font-weight-bold pt-4 pb-1">Brand:</h6>
-                            <input type="text" class="border w-100 p-2 bg-white text-capitalize"
+                            <input name="brand" type="text" class="border w-100 p-2 bg-white text-capitalize"
                                 placeholder="Brand Name go There">
                             <h6 class="font-weight-bold pt-4 pb-1">Condition:</h6>
                             <div class="row px-3">
                                 <div class="col-lg-4 mr-lg-4 my-2 rounded bg-white">
-                                    <input type="radio" name="itemName" value="personal" id="personal">
+                                    <input type="radio" name="condition" value="1" id="personal">
                                     <label for="personal" class="py-2">Fresh</label>
                                 </div>
                                 <div class="col-lg-4 mr-lg-4 my-2 rounded bg-white ">
-                                    <input type="radio" name="itemName" value="business" id="business">
+                                    <input type="radio" name="condition" value="0" id="business">
                                     <label for="business" class="py-2">Used</label>
                                 </div>
                             </div>
                             <h6 class="font-weight-bold pt-4 pb-1">Description:</h6>
-                            <textarea name="" id="" class="border p-3 w-100" rows="7" placeholder="Write details about your product"></textarea>
+                            <textarea name="description" id="" class="border p-3 w-100" rows="7"
+                                placeholder="Write details about your product"></textarea>
                         </div>
                         <div class="col-lg-6">
                             <h6 class="font-weight-bold pt-4 pb-1">Select Ad Category:</h6>
-                            <select name="" id="inputGroupSelect" class="w-100" style="display: none;">
+                            <select name="category_id" id="inputGroupSelect" class="w-100" style="display: none;">
                                 <option value="1">Select category</option>
                                 @foreach (\App\Models\Category::all() as $category)
                                     <option value="{{ $category['id'] }}">{{ $category['name'] }}</option>
@@ -61,11 +62,14 @@
                             </div>
                             <div class="price">
                                 <h6 class="font-weight-bold pt-4 pb-1">Model:</h6>
-                                <input type="text" class="border w-100 p-2 bg-white text-capitalize"
+                                <input name="model" type="text" class="border w-100 p-2 bg-white text-capitalize"
                                     placeholder="Build Model">
                                 <h6 class="font-weight-bold pt-4 pb-1">Specifications:</h6>
-                                <input type="text" class="border w-100 p-2 bg-white text-capitalize"
+                                <input name="specifications" type="text" class="border w-100 p-2 bg-white text-capitalize"
                                     placeholder="Ad Specifications">
+                                <h6 class="font-weight-bold pt-4 pb-1">Location:</h6>
+                                <input name="location" type="text" class="border w-100 p-2 bg-white text-capitalize"
+                                    placeholder="Ad Location">
 
                                 <h6 class="font-weight-bold pt-4 pb-1">Item Price (Rs. PKR):</h6>
                                 <div class="row px-3">
@@ -74,7 +78,7 @@
                                             placeholder="Price" id="price">
                                     </div>
                                     <div class="col-lg-4 mrx-4 rounded bg-white my-2 ">
-                                        <input type="checkbox" value="Negotiable" id="Negotiable">
+                                        <input type="checkbox" name="is_negotiable" value="1" id="Negotiable">
                                         <label for="Negotiable" class="py-2">Negotiable</label>
                                     </div>
                                 </div>
@@ -86,7 +90,7 @@
                                     <span class="d-block btn bg-primary text-white my-3 select-files">Select files</span>
                                     <span class="d-block">Maximum upload file size: 500 KB</span>
                                     <input type="file" multiple class="form-control-file d-none" id="file-upload"
-                                        name="file">
+                                        name="images">
                                 </label>
                             </div>
                         </div>

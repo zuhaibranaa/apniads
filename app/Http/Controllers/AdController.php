@@ -48,7 +48,23 @@ class AdController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $ad = new Ad();
+        $ad->title = $request->title;
+        $ad->description = $request->description;
+        $ad->brand = $request->brand;
+        $ad->model = $request->model;
+        $ad->health = $request->health;
+        $ad->condition = $request->condition;
+        $ad->status = 0;
+        $ad->location = $request->location;
+        $ad->specifications = $request->specifications;
+        $ad->price = $request->price;
+        $ad->images = $request->images;
+        $ad->is_negotiable = $request->is_negotiable;
+        $ad->seller_id = auth()->user()->id;
+        $ad->category_id = $request->category_id;
+        $ad->save();
+        return redirect('dashboard');
     }
 
     /**
