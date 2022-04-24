@@ -14,8 +14,8 @@
                 <img src={{asset('images/'.auth()->user()->image)}} alt="" class="rounded-circle">
               </div>
               <!-- User Name -->
-              <h5 class="text-center">{{$user['name']}}</h5>
-              <p>Joined {{$user['created_at']}}</p>
+              <h5 class="text-center">{{auth()->user()->name}}</h5>
+              <p>Joined {{auth()->user()->created_at}}</p>
               <a href="{{url('profile/edit')}}" class="btn btn-main-sm">Edit Profile</a>
             </div>
             <!-- Dashboard Links -->
@@ -25,9 +25,9 @@
                 <li class="{{Request::is('dashboard') ? 'active' : ''}}"><a href="{{url('dashboard')}}"><i class="fa fa-shopping-basket"></i> My Orders</a></li>
                 @if (auth()->user()->is_admin)
                     <li class="{{Request::is('dashboard/all-ads') ? 'active' : ''}}"><a href="{{url('dashboard/all-ads')}}"><i class="fa fa fa-check-square-o"></i> All Ads</a></li>
-                    <li class="{{Request::is('dashboard/pending-ads') ? 'active' : ''}}"><a href="{{url('dashboard/pending-ads')}}"><i class="fa fa-bolt"></i> Pending Ads<span>{{$count}}</span></a></li>
-                    <li class="{{Request::is('dashboard/pending-ads') ? 'active' : ''}}"><a href="{{url('dashboard/pending-ads')}}"><i class="fa fa-shopping-cart"></i> Active Orders<span>{{$count}}</span></a></li>
-                    <li class="{{Request::is('dashboard/pending-ads') ? 'active' : ''}}"><a href="{{url('dashboard/pending-ads')}}"><i class="fa fa-check-square-o fa-shoping-cart"></i> Delivered Orders<span>{{$count}}</span></a></li>
+                    <li class="{{Request::is('dashboard/pending-ads') ? 'active' : ''}}"><a href="{{url('dashboard/pending-ads')}}"><i class="fa fa-bolt"></i> Pending Ads<span>0</span></a></li>
+                    <li class="{{Request::is('dashboard/pending-ads') ? 'active' : ''}}"><a href="{{url('dashboard/pending-ads')}}"><i class="fa fa-shopping-cart"></i> Active Orders<span>0</span></a></li>
+                    <li class="{{Request::is('dashboard/pending-ads') ? 'active' : ''}}"><a href="{{url('dashboard/pending-ads')}}"><i class="fa fa-check-square-o fa-shoping-cart"></i> Delivered Orders<span>0</span></a></li>
                 @endif
                 <li><a href="#"><i class="fa fa-cog"></i> Logout</a></li>
 
@@ -70,57 +70,43 @@
         <div class="col-md-10 offset-md-1 col-lg-8 offset-lg-0">
           <!-- Recently Favorited -->
           <div class="widget dashboard-container my-adslist">
-            <h3 class="widget-header">My Ads</h3>
+            <h3 class="widget-header">My WishList</h3>
             <table class="table table-responsive product-dashboard-table">
               <thead>
                 <tr>
-                  <th>Image</th>
-                  <th>Product Title</th>
-                  <th class="text-center">Category</th>
-                  <th class="text-center">Action</th>
+                  <th>Item Name</th>
+                  <th class="text-center">Item Price</th>
+                  <th class="text-center">Actions</th>
                 </tr>
               </thead>
               <tbody>
-                  @foreach ($ads as $ad)
-                  <tr>
-
-                    <td class="product-thumb">
-                      <img width="80px" height="auto" src={{asset('images/'.$ad['images'])}} alt="image description"></td>
-                    <td class="product-details">
-                      <h3 class="title">{{$ad['title']}}</h3>
-                      <span class="add-id"><strong>Ad ID:</strong> {{$ad['id']}}</span>
-                      <span><strong>Posted on: </strong><time>{{$ad['created_at']}}</time> </span>
-                      <span class="status active"><strong>Status</strong>{{$ad['status']}}</span>
-                      <span class="location"><strong>Location</strong>{{$ad['location']}}</span>
-                    </td>
-                    <td class="product-category"><span class="categories">{{App\Models\Category::find($ad['category_id'])['name']}}</span></td>
-                    <td class="action" data-title="Action">
-                      <div class="">
-                        <ul class="list-inline justify-content-center">
-                          <li class="list-inline-item">
-                            <a data-toggle="tooltip" data-placement="top" title="view" class="view" href="{{url('ad/'.$ad['id'])}}">
-                              <i class="fa fa-eye"></i>
-                            </a>
-                          </li>
-                          <li class="list-inline-item">
-                            <a class="edit" data-toggle="tooltip" data-placement="top" title="Edit" href="">
-                              <i class="fa fa-pencil"></i>
-                            </a>
-                          </li>
-                        <form id="delete-{{$ad['id']}}" action="{{url('ad/'.$ad['id'])}}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                        </form>
-                          <li class="list-inline-item">
-                            <a class="delete" onclick="document.getElementById('delete-{{$ad['id']}}').submit()" data-toggle="tooltip" data-placement="top" title="Delete">
-                              <i class="fa fa-trash"></i>
-                            </a>
-                          </li>
-                        </ul>
-                      </div>
-                    </td>
-                  </tr>
-                  @endforeach
+                <td class="product-category"><span class="categories">data</span></td>
+                <td class="product-category"><span class="categories">data</span></td>
+                <td class="action" data-title="Action">
+                    <div class="">
+                      <ul class="list-inline justify-content-center">
+                        <li class="list-inline-item">
+                          <a data-toggle="tooltip" data-placement="top" title="view" class="view" href="{{url('ad/'.'null_1')}}">
+                            <i class="fa fa-eye"></i>
+                          </a>
+                        </li>
+                        <li class="list-inline-item">
+                          <a class="edit" data-toggle="tooltip" data-placement="top" title="Edit" href="">
+                            <i class="fa fa-pencil"></i>
+                          </a>
+                        </li>
+                      <form id="delete-null_1" action="{{url('ad/'.'null_1')}}" method="POST">
+                          @csrf
+                          @method('DELETE')
+                      </form>
+                        <li class="list-inline-item">
+                          <a class="delete" onclick="document.getElementById('delete-null_1').submit()" data-toggle="tooltip" data-placement="top" title="Delete">
+                            <i class="fa fa-trash"></i>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </td>
               </tbody>
             </table>
 

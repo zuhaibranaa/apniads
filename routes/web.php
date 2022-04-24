@@ -4,6 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ChatController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\CategoryController;
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +24,24 @@ Route::get('/contact-us', App\Http\Livewire\ContactUs::class);
 Route::get('/about-us', App\Http\Livewire\AboutUs::class);
 Route::get('/', App\Http\Livewire\Index::class);
 Route::middleware('auth')->get('/dashboard', App\Http\Livewire\Dashboard::class);
+Route::middleware('auth')->get('/dashboard/all-ads', function () {
+    if(auth()->user()->is_admin){
+        $ads = App\Models\Ad::all();
+        $count = 0;
+        foreach ($ads as $ad) {
+            if ($ad['status'] == 0) {
+                $count++;
+            }
+        }
+        return view('livewire.dashboard')
+        ->with('ads',$ads)
+        ->with('user', auth()->user())
+        ->with('count', $count);
+    }
+});
+Route::middleware('auth')->resource('/wishlist', WishlistController::class);
+Route::middleware('auth')->resource('/cart', CartController::class);
+Route::middleware('auth')->resource('/order', OrderController::class);
 Route::resource('/ad', AdController::class);
 Route::get('/search', [AdController::class, 'search'])->name('search');
 Route::middleware('auth')->resource('/chat', ChatController::class);

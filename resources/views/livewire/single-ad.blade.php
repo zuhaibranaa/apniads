@@ -103,19 +103,31 @@
 			<div class="col-md-4">
 				<div class="sidebar">
 					<div class="widget price text-center">
+                        <br/>
 						<h4>Price</h4>
 						<p>Rs. {{$ad['price']}}</p>
+                        <hr/>
+                        <form action="{{url('wishlist')}}" method="POST">
+                            @csrf
+                            <input type="hidden" value="{{$ad['id']}}" name="item_id">
+                            <pre><button onclick="submit()" class="btn btn-secondary text-secondary"><i class="fa fa-list-alt text-secondary"></i>  Add To Wishlist</button></pre>
+                        </form>
+                        <p><hr/></p>
+                        <form action="{{url('cart')}}" method="POST">
+                            @csrf
+                            <input type="hidden" value="{{$ad['id']}}" name="item_id">
+                            <pre><button class="btn btn-success text-white"><i class="fa fa-shopping-cart"></i>  Add To Cart</button></pre>
+                        </form>
+
 					</div>
 					<!-- User Profile widget -->
 					<div class="widget user text-center">
 						<img class="rounded-circle img-fluid mb-5 px-5" src="{{asset('images/user/user-thumb.jpg')}}" alt="">
 						<h4><a href="">{{App\Models\User::find($ad['seller_id'])['name']}}</a></h4>
 						<p class="member-time">{{App\Models\User::find($ad['seller_id'])['created_at']}}</p>
-						<a href="">See all ads</a>
+						<a href="{{url('ad')}}">See all ads</a>
 						<ul class="list-inline mt-20">
 							<li class="list-inline-item"><a href="{{url('createchat/'.$ad['seller_id'])}}" class="btn btn-contact d-inline-block  btn-primary px-lg-5 my-1 px-md-3">Contact</a></li>
-							<li class="list-inline-item"><a href="{{url('createchat/'.$ad['seller_id'])}}" class="btn btn-offer d-inline-block btn-primary ml-n1 my-1 px-lg-4 px-md-3">Make an
-									offer</a></li>
 						</ul>
 					</div>
 					<!-- Safety tips widget -->
