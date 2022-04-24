@@ -1,14 +1,14 @@
 <section class="page-title">
-	<!-- Container Start -->
-	<div class="container">
-		<div class="row">
-			<div class="col-md-8 offset-md-2 text-center">
-				<!-- Title text -->
-				<h3>About Us</h3>
-			</div>
-		</div>
-	</div>
-	<!-- Container End -->
+    <!-- Container Start -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 offset-md-2 text-center">
+                <!-- Title text -->
+                <h3>About Us</h3>
+            </div>
+        </div>
+    </div>
+    <!-- Container End -->
 </section>
 
 <section class="section">
@@ -49,7 +49,8 @@
             </div>
             <div class="col-lg-3 col-sm-6">
                 <div class="card my-3 my-lg-0">
-                    <img class="card-img-top" src="images/team/team1.jpg" class="img-fluid w-100" alt="Card image cap">
+                    <img class="card-img-top" src="images/team/team1.jpg" class="img-fluid w-100"
+                        alt="Card image cap">
                     <div class="card-body bg-gray text-center">
                         <h5 class="card-title">John Doe</h5>
                         <p class="card-text">Founder / CEO</p>
@@ -58,7 +59,8 @@
             </div>
             <div class="col-lg-3 col-sm-6">
                 <div class="card my-3 my-lg-0">
-                    <img class="card-img-top" src="images/team/team2.jpg" class="img-fluid w-100" alt="Card image cap">
+                    <img class="card-img-top" src="images/team/team2.jpg" class="img-fluid w-100"
+                        alt="Card image cap">
                     <div class="card-body bg-gray text-center">
                         <h5 class="card-title">John Doe</h5>
                         <p class="card-text">Founder / CEO</p>
@@ -67,7 +69,8 @@
             </div>
             <div class="col-lg-3 col-sm-6">
                 <div class="card my-3 my-lg-0">
-                    <img class="card-img-top" src="images/team/team3.jpg" class="img-fluid w-100" alt="Card image cap">
+                    <img class="card-img-top" src="images/team/team3.jpg" class="img-fluid w-100"
+                        alt="Card image cap">
                     <div class="card-body bg-gray text-center">
                         <h5 class="card-title">John Doe</h5>
                         <p class="card-text">Founder / CEO</p>
@@ -76,7 +79,8 @@
             </div>
             <div class="col-lg-3 col-sm-6">
                 <div class="card my-3 my-lg-0">
-                    <img class="card-img-top" src="images/team/team4.jpg" class="img-fluid w-100" alt="Card image cap">
+                    <img class="card-img-top" src="images/team/team4.jpg" class="img-fluid w-100"
+                        alt="Card image cap">
                     <div class="card-body bg-gray text-center">
                         <h5 class="card-title">John Doe</h5>
                         <p class="card-text">Founder / CEO</p>

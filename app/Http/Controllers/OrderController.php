@@ -15,7 +15,8 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        $orders = order::all()->where('user_id','=',auth()->user()->id);
+        return view('livewire.dashboard-orders')->with('orders',$orders);
     }
 
     /**

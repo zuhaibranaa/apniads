@@ -16,7 +16,7 @@ class CartController extends Controller
     public function index()
     {
         $cart = cart::all()->where('user_id','=',auth()->user()->id);
-        return $cart;
+        return view('livewire.dashboard-cart')->with('ads',$cart);
     }
 
     /**
