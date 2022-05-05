@@ -60,6 +60,7 @@ class AdController extends Controller
         $ad->specifications = $request->specifications;
         $ad->price = $request->price;
         $ad->images = $request->images;
+        Storage::url('images/'.$request->images);
         $ad->is_negotiable = $request->is_negotiable;
         $ad->seller_id = auth()->user()->id;
         $ad->category_id = $request->category_id;

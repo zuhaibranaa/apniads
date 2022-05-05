@@ -88,7 +88,6 @@
                                     <span class="d-block font-weight-bold text-dark">Drop files anywhere to upload</span>
                                     <span class="d-block">or</span>
                                     <span class="d-block btn bg-primary text-white my-3 select-files">Select files</span>
-                                    <span class="d-block">Maximum upload file size: 500 KB</span>
                                     <input type="file" multiple class="form-control-file d-none" id="file-upload"
                                         name="images">
                                 </label>
