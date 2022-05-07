@@ -105,11 +105,13 @@
                             <h4><a href="">{{ App\Models\User::find($ad['seller_id'])['name'] }}</a></h4>
                             <p class="member-time">{{ App\Models\User::find($ad['seller_id'])['created_at'] }}</p>
                             <a href="{{ url('job') }}">See All Jobs</a>
+                            @if (auth()->user()->id != $ad['seller_id'])
                             <ul class="list-inline mt-20">
                                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createChat">
                                     Contact Employer
                                 </button>
                             </ul>
+                            @endif
                         </div>
                         <!-- Coupon Widget -->
                         <div class="widget coupon text-center">
