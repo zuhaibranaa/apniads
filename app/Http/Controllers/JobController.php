@@ -15,7 +15,8 @@ class JobController extends Controller
      */
     public function index()
     {
-        //
+        $jobs = job::all()->where('user_id','=',auth()->user()->id);
+        return view('livewire.dashboard-my-jobs')->with('item',$jobs);
     }
 
     /**
@@ -36,7 +37,29 @@ class JobController extends Controller
      */
     public function store(StorejobRequest $request)
     {
-        //
+        $job = new job();
+        $job->title = $request->title;
+        $job->description = $request->description;
+        $job->salary = $request->salary;
+        $job->status = 0;
+        if($request->hasFile('images'))
+         {
+            foreach($request->file('images') as $image)
+            {
+                $name=$image->getClientOriginalName();
+                $image->move(public_path().'/images/', $name);
+                $data[] = $name;
+            }
+         }
+        $job->images = json_encode($data);
+        $job->seller_id = auth()->user()->id;
+        $job->role = $request->role;
+        $job->category_id = intval($request->category_id);
+        $job->location = $request->location;
+        $job->required_experience = $request->experience;
+        $job->qualification = $request->qualification;
+        $job->save();
+        return $job;
     }
 
     /**
@@ -47,7 +70,7 @@ class JobController extends Controller
      */
     public function show(job $job)
     {
-        //
+        return view('livewire.single-job')->with('ad',$job);
     }
 
     /**

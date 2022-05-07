@@ -8,6 +8,8 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\JobController;
+use App\Http\Controllers\JobApplicationController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -84,6 +86,8 @@ Route::middleware('auth')->get('/dashboard/active-orders', function () {
     }
 });
 Route::middleware('auth')->resource('/wishlist', WishlistController::class);
+Route::middleware('auth')->resource('/job', JobController::class);
+Route::middleware('auth')->resource('/job-application', JobApplicationController::class);
 Route::middleware('auth')->resource('/cart', CartController::class);
 Route::middleware('auth')->resource('/order', OrderController::class);
 Route::resource('/ad', AdController::class);

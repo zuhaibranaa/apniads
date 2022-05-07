@@ -16,11 +16,13 @@ return new class extends Migration
         Schema::create('job_applications', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('job_id');
+            $table->foreign('job_id')->references('id')->on('jobs')->onDelete('cascade');
             $table->unsignedBigInteger('applied_by');
-            $table->integer('applicant_age');
-            $table->integer('applicant_experience');
+            $table->foreign('applied_by')->references('id')->on('users')->onDelete('cascade');
             $table->string('applicant_name');
+            $table->integer('applicant_age');
             $table->string('applicant_contact');
+            $table->integer('applicant_experience');
             $table->string('applicant_availability');
             $table->timestamps();
         });

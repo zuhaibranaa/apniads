@@ -13,9 +13,13 @@
         <tbody>
             @foreach ($ads as $ad)
                 <tr>
-
+                    @php
+                        $arr = trim($ad['images'], '[');
+                        $arr = trim($arr, ']');
+                        $r = explode(',', $arr);
+                    @endphp
                     <td class="product-thumb">
-                        <img width="80px" height="auto" src={{ asset('images/' . $ad['images']) }}
+                        <img width="80px" height="auto" src={{ asset('images/' . Str::substr($r[0], 1, -1)) }}
                             alt="image description">
                     </td>
                     <td class="product-details">

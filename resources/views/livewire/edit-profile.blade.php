@@ -28,7 +28,8 @@
                         <div class="col-lg-6 col-md-6">
                             <div class="widget personal-info">
                                 <h3 class="widget-header user">Edit Personal Information</h3>
-                                <form method="POST" action="{{ url('profile/' . auth()->user()->id) }}">
+                                <form method="POST" action="{{ url('profile/' . auth()->user()->id) }}"
+                                    enctype="multipart/form-data">
                                     @csrf
                                     @method('PUT')
                                     <!-- First Name -->

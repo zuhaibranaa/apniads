@@ -3,8 +3,8 @@
     <section class="page-search">
     </section>
     <!--===================================
-                                                                                                                                                            =            Store Section            =
-                                                                                                                                                            ====================================-->
+                                                                                                                                                                                                                                                                                                                    =            Store Section            =
+                                                                                                                                                                                                                                                                                                                    ====================================-->
     <section class="section bg-gray">
         <!-- Container Start -->
         <div class="container">
@@ -43,30 +43,26 @@
                             <ul class="nav nav-pills  justify-content-center" id="pills-tab" role="tablist">
                                 <li class="nav-item">
                                     <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home"
-                                        role="tab" aria-controls="pills-home" aria-selected="true">Product Details</a>
+                                        role="tab" aria-controls="pills-home" aria-selected="true">Description</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" id="pills-profile-tab" data-toggle="pill"
                                         href="#pills-profile" role="tab" aria-controls="pills-profile"
-                                        aria-selected="false">Specifications</a>
+                                        aria-selected="false">Details</a>
                                 </li>
                             </ul>
                             <div class="tab-content" id="pills-tabContent">
                                 <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
                                     aria-labelledby="pills-home-tab">
-                                    <h3 class="tab-title">Product Description</h3>
+                                    <h3 class="tab-title">Job Description</h3>
                                     <p>{{ $ad['description'] }}</p>
 
                                 </div>
                                 <div class="tab-pane fade" id="pills-profile" role="tabpanel"
                                     aria-labelledby="pills-profile-tab">
-                                    <h3 class="tab-title">Product Specifications</h3>
+                                    <h3 class="tab-title">Job Details</h3>
                                     <table class="table table-bordered product-table">
                                         <tbody>
-                                            <tr>
-                                                <td>Seller Price</td>
-                                                <td>Rs. {{ $ad['price'] }}</td>
-                                            </tr>
                                             <tr>
                                                 <td>Added</td>
                                                 <td>{{ $ad['created_at'] }}</td>
@@ -76,26 +72,14 @@
                                                 <td>{{ $ad['location'] }}</td>
                                             </tr>
                                             <tr>
-                                                <td>Brand</td>
-                                                <td>{{ $ad['brand'] }}</td>
+                                                <td>Qualifications</td>
+                                                <td>{{ $ad['qualification'] }}</td>
                                             </tr>
                                             <tr>
-                                                <td>Condition</td>
+                                                <td>Req. Experience</td>
                                                 <td>
-                                                    @if ($ad['condition'] == 1)
-                                                        New
-                                                    @else
-                                                        Used
-                                                    @endif
+                                                    {{ $ad['required_experience'] }}
                                                 </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Model</td>
-                                                <td>{{ $ad['model'] }}</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Health</td>
-                                                <td>{{ $ad['health'] }}</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -108,22 +92,10 @@
                     <div class="sidebar">
                         <div class="widget price text-center">
                             <br />
-                            <h4>Price</h4>
-                            <p>Rs. {{ $ad['price'] }}</p>
+                            <h4>Salary</h4>
+                            <p>Rs. {{ $ad['salary'] }}</p>
                             <hr />
-                            <form action="{{ url('wishlist') }}" method="POST">
-                                @csrf
-                                <input type="hidden" value="{{ $ad['id'] }}" name="item_id">
-                                <pre><button onclick="submit()" class="btn btn-secondary text-secondary"><i class="fa fa-list-alt text-secondary"></i>  Add To Wishlist</button></pre>
-                            </form>
-                            <p>
-                                <hr />
-                            </p>
-                            <form action="{{ url('cart') }}" method="POST">
-                                @csrf
-                                <input type="hidden" value="{{ $ad['id'] }}" name="item_id">
-                                <pre><button class="btn btn-success text-white"><i class="fa fa-shopping-cart"></i>  Add To Cart</button></pre>
-                            </form>
+                            <pre><button data-toggle="modal" data-target="#exampleModalCenter" class="btn btn-secondary text-secondary"><i class="fa fa-list-alt text-secondary"></i>  Apply For This Job</button></pre>
 
                         </div>
                         <!-- User Profile widget -->
@@ -132,27 +104,17 @@
                                 src="{{ asset('images/user/user-thumb.jpg') }}" alt="">
                             <h4><a href="">{{ App\Models\User::find($ad['seller_id'])['name'] }}</a></h4>
                             <p class="member-time">{{ App\Models\User::find($ad['seller_id'])['created_at'] }}</p>
-                            <a href="{{ url('ad') }}">See all ads</a>
+                            <a href="{{ url('job') }}">See All Jobs</a>
                             <ul class="list-inline mt-20">
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createChat">
-                                    Contact Seller
-                                </button>
-                            </ul>
-                        </div>
-                        <!-- Safety tips widget -->
-                        <div class="widget disclaimer">
-                            <h5 class="widget-header">Safety Tips</h5>
-                            <ul>
-                                <li>Meet seller at a public place</li>
-                                <li>Check the item before you buy</li>
-                                <li>Pay only after collecting the item</li>
-                                <li>Pay only after collecting the item</li>
+                                <li class="list-inline-item"><a href="{{ url('createchat/' . $ad['seller_id']) }}"
+                                        class="btn btn-contact d-inline-block  btn-primary px-lg-5 my-1 px-md-3">Contact</a>
+                                </li>
                             </ul>
                         </div>
                         <!-- Coupon Widget -->
                         <div class="widget coupon text-center">
                             <!-- Coupon description -->
-                            <p>Have a great product to post ? Share it with
+                            <p>Have a great Job to post ? Share it with
                                 your fellow users.
                             </p>
                             <!-- Submii button -->
@@ -164,41 +126,58 @@
 
             </div>
         </div>
-        <!-- Container End -->
-    </section>
-    <!-- Modal -->
-    <div class="modal fade" id="createChat" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Send Message</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form id="sendMessage" action="{{ url('chat') }}" method="POST">
-                        @csrf
-                        <div class="form-group">
-                            <input type="hidden" name="from_user" value="{{ auth()->user()->id }}">
-                            <input type="hidden" name="to_user" value="{{ $ad['seller_id'] }}">
-                            <label for="message">Enter Your Message : </label>
-                            <textarea name="messge" class="form-control" id="message" placeholder="Enter Text Here"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="attachment">Attachment</label>
-                            <input type="file" class="form-control-file" id="attachment" name="attachment">
-                        </div>
 
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" onclick="document.getElementById('sendMessage').submit()"
-                        class="btn btn-primary">Send</button>
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Enter Your Details</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="ApplicationForm" action="{{ url('job-application') }}" method="POST"
+                            enctype="multipart/form-data">
+                            @csrf
+                            <div class="form-group">
+                                <input type="hidden" name="appliedby" value="{{ auth()->user()->id }}">
+                                <input type="hidden" name="jobid" value="{{ $ad->id }}">
+                                <label for="contact">Enter Your Name : </label>
+                                <input required class="form-control" type="text" name="name" id="name">
+                            </div>
+                            <div class="form-group">
+                                <label for="contact">Enter Your Phone : </label>
+                                <input required class="form-control" type="text" name="phone" id="phone">
+                            </div>
+                            <div class="form-group">
+                                <label for="contact">Enter Your Age : </label>
+                                <input required class="form-control" type="text" name="age" id="age">
+                            </div>
+                            <div class="form-group">
+                                <label for="contact">Enter Your Experience : </label>
+                                <input required class="form-control" type="text" name="experience" id="experience">
+                            </div>
+                            <div class="form-group">
+                                <label for="contact">Enter Your Availability : </label>
+                                <input required class="form-control" type="date" name="availability" id="availability">
+                            </div>
+                            <div class="form-group">
+                                <label for="contact">Upload Your CV / Resume : </label>
+                                <input required class="form-control" type="file" name="cv" id="cv">
+                            </div>
+                        </form>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" onclick="document.getElementById('ApplicationForm').submit()"
+                            class="btn btn-primary">Submit</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 @endsection

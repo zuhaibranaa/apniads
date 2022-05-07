@@ -6,6 +6,7 @@ use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 use App\Models\Category;
 use App\Models\Ad;
+use App\Models\job;
 
 class CategoryController extends Controller
 {
@@ -49,6 +50,9 @@ class CategoryController extends Controller
     public function show(Category $category)
     {
         $ads = Ad::all()->where('category_id','=',$category['id']);
+        if (empty($ads)) {
+            $ads = job::all()->where('category_id','=',$category['id']);
+        }
         return view('livewire.all-ads')->with('ads',$ads);
     }
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Ad;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class AdController extends Controller
 {
@@ -59,13 +60,32 @@ class AdController extends Controller
         $ad->location = $request->location;
         $ad->specifications = $request->specifications;
         $ad->price = $request->price;
-        $ad->images = $request->images;
-        Storage::url('images/'.$request->images);
-        $ad->is_negotiable = $request->is_negotiable;
+        // // $ad->images = $request->images;
+
+
+        if($request->hasFile('images'))
+         {
+            foreach($request->file('images') as $image)
+            {
+                $name=$image->getClientOriginalName();
+                $image->move(public_path().'/images/', $name);
+                $data[] = $name;
+            }
+         }
+        $ad->images = json_encode($data);
+
+        // // echo $request->images;
+        // \Storage::url('images/'.$request->images);
+        if(!$request->has('is_negotiable')){
+            $ad->is_negotiable = 0;
+        }else{
+            $ad->is_negotiable = $request->is_negotiable;
+        }
         $ad->seller_id = auth()->user()->id;
         $ad->category_id = $request->category_id;
         $ad->save();
         return redirect('dashboard');
+        // return $request;
     }
 
     /**

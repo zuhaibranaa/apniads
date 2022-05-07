@@ -30,6 +30,14 @@
                                         href="{{ url('wishlist') }}"><i class="fa fa-shopping-cart"></i> My
                                         Wishlist<span></span></a>
                                 </li>
+                                <li class="{{ Request::is('job') ? 'active' : '' }}"><a href="{{ url('job') }}"><i
+                                            class="fa fa-suitcase"></i> My
+                                        Jobs<span></span></a>
+                                </li>
+                                <li class="{{ Request::is('job-application') ? 'active' : '' }}"><a
+                                        href="{{ url('job-application') }}"><i class="fa fa-list-alt"></i> My
+                                        Job Applications<span></span></a>
+                                </li>
                                 <li class="{{ Request::is('cart') ? 'active' : '' }}"><a href="{{ url('cart') }}"><i
                                             class="fa fa-shopping-basket"></i> Cart<span></span></a></li>
                                 @if (auth()->user()->is_admin)

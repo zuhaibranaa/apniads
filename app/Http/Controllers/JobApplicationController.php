@@ -15,17 +15,8 @@ class JobApplicationController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $jobapplications = JobApplication::all()->where('user_id','=',auth()->user()->id);
+        return view('livewire.dashboard-my-jobs')->with('item',$jobapplications);
     }
 
     /**
@@ -36,7 +27,16 @@ class JobApplicationController extends Controller
      */
     public function store(StoreJobApplicationRequest $request)
     {
-        //
+        $application = new JobApplication();
+        $application->applied_by = $request->appliedby;
+        $application->job_id = $request->jobid;
+        $application->applicant_name = $request->name;
+        $application->applicant_age = $request->age;
+        $application->applicant_contact = $request->phone;
+        $application->applicant_experience = $request->experience;
+        $application->applicant_availability = $request->availability;
+        $application->save();
+        return redirect('job-application');
     }
 
     /**

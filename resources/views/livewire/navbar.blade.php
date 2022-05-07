@@ -20,7 +20,7 @@
                                 <a class="nav-link" href="{{ url('dashboard') }}">Dashboard</a>
                             </li>
                             <li class="nav-item {{ Request::is('ad') ? 'active' : '' }}">
-                                <a class="nav-link" href="{{ url('ad') }}">All Ads</a>
+                                <a class="nav-link" href="{{ url('ad') }}">All Listings</a>
                             </li>
                             <li class="nav-item {{ Request::is('chat') ? 'active' : '' }}">
                                 <a class="nav-link" href="{{ url('chat') }}">Chats</a>
@@ -60,7 +60,7 @@
                                 <li class="nav-item">
                                     <a class="nav-link text-white login-button bg-danger" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
-                                                         document.getElementById('logout-form').submit();">
+                                                             document.getElementById('logout-form').submit();">
                                         <i class="fa fa-sign-out" aria-hidden="true"></i>Logout {{ Auth::user()->name }}
                                     </a>
 

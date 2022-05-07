@@ -67,11 +67,11 @@ class ProfileController extends Controller
                 'new_password' => ['required'],
                 'new_confirm_password' => ['same:new_password'],
             ]);
-            $user->name = Hash::make($value)($request['password']);
+            $user->password = Hash::make($request['password']);
         }
-        if ($request->hasFile('image')) {
+        if($request->hasFile('image')){
             $filename = $request->image->getClientOriginalName();
-            $request->image->storeAs('local/images',$filename);
+            $request->image->move(public_path().'/images/', $filename);
             $user->image = $filename;
         }
         $user->name = $request['name'];

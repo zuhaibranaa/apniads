@@ -289,6 +289,7 @@
                         <ul class="list-unstyled chat-list mt-2 mb-0">
                             @foreach ($chats as $chat)
                                 @if ($chat['from_user'] != auth()->user()->id)
+                                    <br />
                                     <li class="clearfix active">
                                         <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="avatar">
                                         <div class="about">
@@ -297,6 +298,17 @@
                                             <div class="status"> <i class="fa fa-circle online"></i> online </div>
                                         </div>
                                     </li>
+                                    <br />
+                                @else
+                                    <li class="clearfix active">
+                                        <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="avatar">
+                                        <div class="about">
+                                            <div class="name">
+                                                {{ App\Models\User::find($chat['to_user'])['name'] }}</div>
+                                            {{-- <div class="status"> <i class="fa fa-circle online"></i> online </div> --}}
+                                        </div>
+                                    </li>
+                                    <br />
                                 @endif
                             @endforeach
 
