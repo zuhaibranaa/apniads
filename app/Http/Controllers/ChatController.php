@@ -16,10 +16,16 @@ class ChatController extends Controller
      */
     public function index()
     {
-        $chats = Chat::all()->where(function($q){
-            $q->where('from_user','=',auth()->user()->id)->orWhere('to_user','=',auth()->user()->id);
-          });
-        return view('livewire.chats')->with('chats',$chats);
+        $chats = Chat::all()->where('from_user',auth()->user()->id);
+        $chats2 = Chat::all()->where('to_user',auth()->user()->id);
+        $allchats = array($chats)+array($chats2);
+        $allchats = $allchats[0];
+        $names = [];
+        foreach ($allchats as $chat => $value) {
+            array_push()
+        }
+        return view('livewire.chats')->with('chats',$allchats);
+        // return $allchats[0][0];
     }
 
     /**
@@ -40,7 +46,18 @@ class ChatController extends Controller
      */
     public function store(StoreChatRequest $request)
     {
-        //
+        $chat = new Chat();
+        $chat->from_user = $request->from_user;
+        $chat->to_user = $request->to_user;
+        $chat->content = $request->messge;
+        $chat->image = $request->attachment;
+        if($request->hasFile('attachment')){
+            $filename = $request->image->getClientOriginalName();
+            $request->image->move(public_path().'/attachments/', $filename);
+            $chat->image = $filename;
+        }
+        $chat->save();
+        return redirect('chat');;
     }
 
     /**
