@@ -6,6 +6,7 @@ use App\Http\Requests\StoreChatRequest;
 use App\Http\Requests\UpdateChatRequest;
 use App\Models\Chat;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 
 class ChatController extends Controller
 {
@@ -16,16 +17,20 @@ class ChatController extends Controller
      */
     public function index()
     {
-        $chats = Chat::all()->where('from_user',auth()->user()->id);
-        $chats2 = Chat::all()->where('to_user',auth()->user()->id);
-        $allchats = array($chats)+array($chats2);
-        $allchats = $allchats[0];
-        $names = [];
-        foreach ($allchats as $chat => $value) {
-            array_push()
+        $allchats = DB::select('select * from chats where from_user = ? OR to_user = ?', [auth()->user()->id,auth()->user()->id]);
+        $values = [];
+        for ($i=0; $i < count($allchats); $i++) {
+            array_push($values,(int)$allchats[$i]->from_user);
+            array_push($values,(int)$allchats[$i]->to_user);
         }
-        return view('livewire.chats')->with('chats',$allchats);
-        // return $allchats[0][0];
+        $values = collect($values)->unique()->values()->all();
+        unset($values[array_search(auth()->user()->id,$values)]);
+        $values = array_values($values);
+        return view('livewire.chats')
+        ->with('chats',$allchats)
+        ->with('ids',$values);
+        $data = $allchats;
+        // return $values;
     }
 
     /**
@@ -51,11 +56,6 @@ class ChatController extends Controller
         $chat->to_user = $request->to_user;
         $chat->content = $request->messge;
         $chat->image = $request->attachment;
-        if($request->hasFile('attachment')){
-            $filename = $request->image->getClientOriginalName();
-            $request->image->move(public_path().'/attachments/', $filename);
-            $chat->image = $filename;
-        }
         $chat->save();
         return redirect('chat');;
     }

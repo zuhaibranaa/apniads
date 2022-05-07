@@ -287,39 +287,18 @@
                             <input type="text" class="form-control" placeholder="Search...">
                         </div>
                         <ul class="list-unstyled chat-list mt-2 mb-0">
-                            @foreach ($chats as $chat)
-                                @if ($chat['from_user'] != auth()->user()->id)
-                                    <br />
-                                    <li class="clearfix active">
-                                        <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="avatar">
-                                        <div class="about">
-                                            <div class="name">
-                                                {{ App\Models\User::find($chat['from_user'])['name'] }}</div>
-                                            <div class="status"> <i class="fa fa-circle online"></i> online </div>
-                                        </div>
-                                    </li>
-                                    <br />
-                                @else
-                                    <li class="clearfix active">
-                                        <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="avatar">
-                                        <div class="about">
-                                            <div class="name">
-                                                {{ App\Models\User::find($chat['to_user'])['name'] }}</div>
-                                            {{-- <div class="status"> <i class="fa fa-circle online"></i> online </div> --}}
-                                        </div>
-                                    </li>
-                                    <br />
-                                @endif
+                            @foreach ($ids as $chat)
+                                <br />
+                                <li id="{{ $chat }}" class="clearfix li">
+                                    <img src="{{ asset('images/' . App\Models\User::find($chat)['image']) }}"
+                                        alt="avatar">
+                                    <div class="about">
+                                        <div class="name mt-3" style="text-transform: capitalize">
+                                            {{ App\Models\User::find($chat)['name'] }}</div>
+                                        {{-- <div class="status"> <i class="fa fa-circle online"></i> online </div> --}}
+                                    </div>
+                                </li>
                             @endforeach
-
-                            {{-- <li class="clearfix active">
-                        <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="avatar">
-                        <div class="about">
-                            <div class="name">Aiden Chavez</div>
-                            <div class="status"> <i class="fa fa-circle online"></i> online </div>
-                        </div>
-                    </li> --}}
-
                         </ul>
                     </div>
                     <div class="chat">
@@ -327,48 +306,19 @@
                             <div class="row">
                                 <div class="col-lg-6">
                                     <a href="javascript:void(0);" data-toggle="modal" data-target="#view_info">
-                                        <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="avatar">
+                                        <img id="avatar" src="https://bootdey.com/img/Content/avatar/avatar2.png"
+                                            alt="avatar">
                                     </a>
                                     <div class="chat-about">
-                                        <h6 class="m-b-0">Aiden Chavez</h6>
-                                        <small>Last seen: 2 hours ago</small>
+                                        <h6 name='user_name' style="text-transform: capitalize" class="m-b-0 mt-2">Dummy
+                                            Data</h6>
                                     </div>
-                                </div>
-                                <div class="col-lg-6 hidden-sm text-right">
-                                    <a href="javascript:void(0);" class="btn btn-outline-secondary"><i
-                                            class="fa fa-camera"></i></a>
-                                    <a href="javascript:void(0);" class="btn btn-outline-primary"><i
-                                            class="fa fa-image"></i></a>
-                                    <a href="javascript:void(0);" class="btn btn-outline-info"><i
-                                            class="fa fa-cogs"></i></a>
-                                    <a href="javascript:void(0);" class="btn btn-outline-warning"><i
-                                            class="fa fa-question"></i></a>
                                 </div>
                             </div>
                         </div>
                         <div class="chat-history">
-                            <ul class="m-b-0">
-                                <li class="clearfix">
-                                    <div class="message-data text-right">
-                                        <span class="message-data-time">10:10 AM, Today</span>
-                                        <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="avatar">
-                                    </div>
-                                    <div class="message other-message float-right"> Hi Aiden, how are you? How is the
-                                        project coming along? </div>
-                                </li>
-                                <li class="clearfix">
-                                    <div class="message-data">
-                                        <span class="message-data-time">10:12 AM, Today</span>
-                                    </div>
-                                    <div class="message my-message">Are we meeting today?</div>
-                                </li>
-                                <li class="clearfix">
-                                    <div class="message-data">
-                                        <span class="message-data-time">10:15 AM, Today</span>
-                                    </div>
-                                    <div class="message my-message">Project has been already finished and I have results to
-                                        show you.</div>
-                                </li>
+                            <ul id='messages_content' class="m-b-0">
+                                Dummy Messages
                             </ul>
                         </div>
                         <div class="chat-message clearfix">
@@ -384,10 +334,54 @@
             </div>
         </div>
     </div>
-
-
-
-    <script type="text/javascript">
-
+    <script>
+        let allChats = document.getElementsByClassName('li');
+        let index0Val = document.getElementsByClassName('li')[0];
+        index0Val.className = 'clearfix li active';
+        document.cookie = "val ="+document.getElementsByClassName("li")[0].id+";";
+        document.getElementById('avatar').src = document.getElementsByClassName('li active')[0].children[0].src;
+        document.getElementsByName('user_name')[0].textContent = document.getElementsByClassName(
+            'li active')[0].children[1].children[0].textContent;
+        let innerTextContents = `@foreach ($chats as $message)
+            @if ($message->from_user == $_COOKIE["val"] || $message->to_user == $_COOKIE["val"])
+            @if ($message->from_user == auth()->user()->id)
+                <li class="clearfix">
+                    <div class="message-data">
+                        <span class="message-data-time">{{ $message->created_at }}</span>
+                    </div>
+                    <div class="message my-message">{{ $message->content }}</div>
+                </li>
+            @else
+                <li class="clearfix">
+                    <div class="message-data text-right">
+                        <span class="message-data-time">{{ $message->created_at }}</span>
+                        <img src="${document.getElementsByClassName('li active')[0].children[0]
+                    .src}" alt="avatar">
+                    </div>
+                    <div class="message other-message float-right"> {{ $message->content }}
+                    </div>
+                </li>
+            @endif
+            @endif
+        @endforeach`;
+        document.getElementById('messages_content').innerHTML = innerTextContents;
+        for (let obj of allChats) {
+            if (obj === allChats[0]) {
+                obj.className = 'clearfix li active';
+            }
+            obj.addEventListener('click', () => {
+                console.log(obj);
+                for (let obj of allChats) {
+                    obj.className = 'clearfix li';
+                }
+                obj.className = 'clearfix li active';
+                document.getElementById('avatar').src = document.getElementsByClassName('li active')[0].children[0]
+                    .src;
+                document.getElementsByName('user_name')[0].textContent = document.getElementsByClassName(
+                    'li active')[0].children[1].children[0].textContent;
+                document.getElementById('messages_content').innerHTML = innerTextContents;
+                document.cookie = "val ="+document.getElementsByClassName("li")[0].id+";";
+            });
+        }
     </script>
 @endsection

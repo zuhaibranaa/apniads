@@ -3,8 +3,8 @@
     <section class="page-search">
     </section>
     <!--===================================
-                                                                                                                                                            =            Store Section            =
-                                                                                                                                                            ====================================-->
+                                                                                                                                                                    =            Store Section            =
+                                                                                                                                                                    ====================================-->
     <section class="section bg-gray">
         <!-- Container Start -->
         <div class="container">
@@ -186,11 +186,6 @@
                             <label for="message">Enter Your Message : </label>
                             <textarea name="messge" class="form-control" id="message" placeholder="Enter Text Here"></textarea>
                         </div>
-                        <div class="form-group">
-                            <label for="attachment">Attachment</label>
-                            <input type="file" class="form-control-file" id="attachment" name="attachment">
-                        </div>
-
                     </form>
                 </div>
                 <div class="modal-footer">

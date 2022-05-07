@@ -3,8 +3,8 @@
     <section class="page-search">
     </section>
     <!--===================================
-                                                                                                                                                                                                                                                                                                                    =            Store Section            =
-                                                                                                                                                                                                                                                                                                                    ====================================-->
+                                                                                                                                                                                                                                                                                                                                            =            Store Section            =
+                                                                                                                                                                                                                                                                                                                                            ====================================-->
     <section class="section bg-gray">
         <!-- Container Start -->
         <div class="container">
@@ -106,9 +106,9 @@
                             <p class="member-time">{{ App\Models\User::find($ad['seller_id'])['created_at'] }}</p>
                             <a href="{{ url('job') }}">See All Jobs</a>
                             <ul class="list-inline mt-20">
-                                <li class="list-inline-item"><a href="{{ url('createchat/' . $ad['seller_id']) }}"
-                                        class="btn btn-contact d-inline-block  btn-primary px-lg-5 my-1 px-md-3">Contact</a>
-                                </li>
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createChat">
+                                    Contact Employer
+                                </button>
                             </ul>
                         </div>
                         <!-- Coupon Widget -->
@@ -180,4 +180,35 @@
             </div>
         </div>
     </section>
+
+    <!-- Modal -->
+    <div class="modal fade" id="createChat" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Send Message</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="sendMessage" action="{{ url('chat') }}" method="POST">
+                        @csrf
+                        <div class="form-group">
+                            <input type="hidden" name="from_user" value="{{ auth()->user()->id }}">
+                            <input type="hidden" name="to_user" value="{{ $ad['seller_id'] }}">
+                            <label for="message">Enter Your Message : </label>
+                            <textarea name="messge" class="form-control" id="message" placeholder="Enter Text Here"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" onclick="document.getElementById('sendMessage').submit()"
+                        class="btn btn-primary">Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
