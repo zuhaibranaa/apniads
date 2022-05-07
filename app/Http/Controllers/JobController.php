@@ -59,7 +59,7 @@ class JobController extends Controller
         $job->required_experience = $request->experience;
         $job->qualification = $request->qualification;
         $job->save();
-        return $job;
+        return redirect('/');;
     }
 
     /**
