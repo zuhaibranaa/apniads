@@ -42,7 +42,7 @@
                                 </li>
                                 <li class="list-inline-item">
                                     <a class="edit" data-toggle="tooltip" data-placement="top" title="Edit"
-                                        href="">
+                                        href="{{url('ad/'.$ad->id.'/edit')}}">
                                         <i class="fa fa-pencil"></i>
                                     </a>
                                 </li>

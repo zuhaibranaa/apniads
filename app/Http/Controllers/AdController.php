@@ -60,9 +60,6 @@ class AdController extends Controller
         $ad->location = $request->location;
         $ad->specifications = $request->specifications;
         $ad->price = $request->price;
-        // // $ad->images = $request->images;
-
-
         if($request->hasFile('images'))
          {
             foreach($request->file('images') as $image)
@@ -73,9 +70,6 @@ class AdController extends Controller
             }
          }
         $ad->images = json_encode($data);
-
-        // // echo $request->images;
-        // \Storage::url('images/'.$request->images);
         if(!$request->has('is_negotiable')){
             $ad->is_negotiable = 0;
         }else{
@@ -85,7 +79,6 @@ class AdController extends Controller
         $ad->category_id = $request->category_id;
         $ad->save();
         return redirect('dashboard');
-        // return $request;
     }
 
     /**
@@ -105,9 +98,9 @@ class AdController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Ad $ad)
     {
-        //
+        return view('livewire.edit-listing')->with('type','ad')->with('ad',$ad);
     }
 
     /**
@@ -119,7 +112,35 @@ class AdController extends Controller
      */
     public function update(Request $request,Ad $ad)
     {
-        //
+        $ad->title = $request->title;
+        $ad->description = $request->description;
+        $ad->brand = $request->brand;
+        $ad->model = $request->model;
+        $ad->health = $request->health;
+        $ad->condition = $request->condition;
+        $ad->status = 0;
+        $ad->location = $request->location;
+        $ad->specifications = $request->specifications;
+        $ad->price = $request->price;
+        if($request->hasFile('images'))
+         {
+            foreach($request->file('images') as $image)
+            {
+                $name=$image->getClientOriginalName();
+                $image->move(public_path().'/images/', $name);
+                $data[] = $name;
+            }
+         }
+        $ad->images = json_encode($data);
+        if(!$request->has('is_negotiable')){
+            $ad->is_negotiable = 0;
+        }else{
+            $ad->is_negotiable = $request->is_negotiable;
+        }
+        $ad->seller_id = auth()->user()->id;
+        $ad->category_id = $request->category_id;
+        $ad->save();
+        return redirect('dashboard');
     }
 
     /**

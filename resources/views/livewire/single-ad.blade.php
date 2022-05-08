@@ -129,7 +129,7 @@
                         <!-- User Profile widget -->
                         <div class="widget user text-center">
                             <img class="rounded-circle img-fluid mb-5 px-5"
-                                src="{{ asset('images/user/user-thumb.jpg') }}" alt="">
+                                src="{{ asset('images/'.App\Models\User::find($ad['seller_id'])['image']) }}" alt="">
                             <h4><a href="">{{ App\Models\User::find($ad['seller_id'])['name'] }}</a></h4>
                             <p class="member-time">{{ App\Models\User::find($ad['seller_id'])['created_at'] }}</p>
                             <a href="{{ url('ad') }}">See all ads</a>
