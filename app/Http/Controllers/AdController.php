@@ -56,7 +56,11 @@ class AdController extends Controller
         $ad->model = $request->model;
         $ad->health = $request->health;
         $ad->condition = $request->condition;
-        $ad->status = 0;
+        if (auth()->user()->is_admin) {
+            $ad->status = 1;
+        }else{
+            $ad->status = 0;
+        }
         $ad->location = $request->location;
         $ad->specifications = $request->specifications;
         $ad->price = $request->price;
@@ -116,29 +120,29 @@ class AdController extends Controller
             $ad->status = 1;
         }else{
             $ad->title = $request->title;
-        $ad->description = $request->description;
-        $ad->brand = $request->brand;
-        $ad->model = $request->model;
-        $ad->health = $request->health;
-        $ad->condition = $request->condition;
-        $ad->location = $request->location;
-        $ad->specifications = $request->specifications;
-        $ad->price = $request->price;
-        if($request->hasFile('images'))
-         {
-            foreach($request->file('images') as $image)
+            $ad->description = $request->description;
+            $ad->brand = $request->brand;
+            $ad->model = $request->model;
+            $ad->health = $request->health;
+            $ad->condition = $request->condition;
+            $ad->location = $request->location;
+            $ad->specifications = $request->specifications;
+            $ad->price = $request->price;
+            if($request->hasFile('images'))
             {
-                $name=$image->getClientOriginalName();
-                $image->move(public_path().'/images/', $name);
-                $data[] = $name;
+                foreach($request->file('images') as $image)
+                {
+                    $name=$image->getClientOriginalName();
+                    $image->move(public_path().'/images/', $name);
+                    $data[] = $name;
+                }
             }
-         }
-        $ad->images = json_encode($data);
-        if(!$request->has('is_negotiable')){
-            $ad->is_negotiable = 0;
-        }else{
-            $ad->is_negotiable = $request->is_negotiable;
-        }
+            $ad->images = json_encode($data);
+            if(!$request->has('is_negotiable')){
+                $ad->is_negotiable = 0;
+            }else{
+                $ad->is_negotiable = $request->is_negotiable;
+            }
         }
         $ad->save();
         return redirect('dashboard');

@@ -198,18 +198,18 @@
                             <fieldset class="border border-gary p-4 mb-5">
                                 <div class="row">
                                     <div class="col-lg-12">
-                                        <h3>Post Your Job</h3>
+                                        <h3>Update Your Job</h3>
                                     </div>
                                     <div class="col-lg-6">
                                         <h6 class="font-weight-bold pt-4 pb-1">Title Of Job:</h6>
-                                        <input name="title" type="text" class="border w-100 p-2 bg-white text-capitalize"
+                                        <input value="{{$job->title}}" name="title" type="text" class="border w-100 p-2 bg-white text-capitalize"
                                             placeholder="Job title go There">
                                         <h6 class="font-weight-bold pt-4 pb-1">Job Role:</h6>
-                                        <input name="role" type="text" class="border w-100 p-2 bg-white text-capitalize"
+                                        <input value="{{$job->role}}" name="role" type="text" class="border w-100 p-2 bg-white text-capitalize"
                                             placeholder="Job Role go There">
                                         <h6 class="font-weight-bold pt-4 pb-1">Description:</h6>
                                         <textarea name="description" id="" class="border p-3 w-100" rows="7"
-                                            placeholder="Write details about your Job"></textarea>
+                                            placeholder="Write details about your Job">{{$job->description}}</textarea>
                                     </div>
                                     <div class="col-lg-6">
                                         <h6 class="font-weight-bold pt-4 pb-1">Select Ad Category:</h6>
@@ -240,20 +240,20 @@
                                         </div>
                                         <div class="price">
                                             <h6 class="font-weight-bold pt-4 pb-1">Required Experience :</h6>
-                                            <input name="experience" type="text" class="border w-100 p-2 bg-white text-capitalize"
+                                            <input value="{{$job->required_experience}}" name="experience" type="text" class="border w-100 p-2 bg-white text-capitalize"
                                                 placeholder="Experience in Years">
                                             <h6 class="font-weight-bold pt-4 pb-1">Location:</h6>
-                                            <input name="location" type="text" class="border w-100 p-2 bg-white text-capitalize"
+                                            <input value="{{$job->location}}" name="location" type="text" class="border w-100 p-2 bg-white text-capitalize"
                                                 placeholder="Job Location">
 
                                             <h6 class="font-weight-bold pt-4 pb-1">Job Salary (Rs. PKR) & Required Qualification:</h6>
                                             <div class="row px-3">
                                                 <div class="col-lg-4 mr-lg-4 rounded bg-white my-2 ">
-                                                    <input type="text" name="salary" class="border-0 py-2 w-100 price"
+                                                    <input value="{{$job->salary}}" type="text" name="salary" class="border-0 py-2 w-100 price"
                                                         placeholder="Salary" id="salary">
                                                 </div>
                                                 <div class="col-lg-6 mr-lg-6 rounded bg-white my-2 ">
-                                                    <input type="text" name="qualification" class="border-0 py-2 w-100 price"
+                                                    <input value="{{$job->qualification}}" type="text" name="qualification" class="border-0 py-2 w-100 price"
                                                         placeholder="Required Qualification" id="qualification">
                                                 </div>
                                             </div>
