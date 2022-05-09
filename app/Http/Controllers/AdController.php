@@ -27,7 +27,7 @@ class AdController extends Controller
      */
     public function index()
     {
-        $ads = Ad::all();
+        $ads = Ad::all()->where('status',1);
         return view('livewire.all-ads')->with('ads',$ads);
     }
 

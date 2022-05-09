@@ -87,8 +87,13 @@
                                             <div class="thumb-content">
                                                 <!-- <div class="price">$200</div> -->
                                                 <a href="{{ url('ad/' . $ad['id']) }}">
+                                                    @php
+                                                        $arr = trim($ad['images'], '[');
+                                                        $arr = trim($arr, ']');
+                                                        $image = explode(',', $arr);
+                                                    @endphp
                                                     <img class="card-img-top img-fluid"
-                                                        src="{{ asset('images/' . $ad['images']) }}" alt="Card image cap">
+                                                        src="{{ asset('images/' . Str::substr($image[0], 1, -1)) }}">
                                                 </a>
                                             </div>
                                             <div class="card-body">

@@ -332,7 +332,14 @@
                         <form action="{{ url('chat') }}" method="post" id="newMessageForm">
                             @csrf
                             <input type="hidden" name="from_user" value="{{ auth()->user()->id }}">
-                            <input type="hidden" name="to_user" value="{{ $_COOKIE['val'] }}">
+                            <input type="hidden" name="to_user" value="
+                            @php
+                            try {
+                                echo $_COOKIE['val'];
+                            } catch (\Throwable $th) {
+                                //throw $th;
+                            }
+                            @endphp">
                         </form>
                     </div>
                 </div>
