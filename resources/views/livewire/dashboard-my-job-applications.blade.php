@@ -1,12 +1,14 @@
 @extends('livewire.layouts.dashboard')
 @section('data')
-    <h3 class="widget-header">My WishList</h3>
+    <h3 class="widget-header">My Job Applications</h3>
     <table class="table table-responsive product-dashboard-table">
         <thead>
             <tr>
-                <th>Item Name</th>
-                <th class="text-center">Item Price</th>
-                <th class="text-center">Actions</th>
+                <th>Applicant Name</th>
+                <th class="text-center">Applicant Age</th>
+                <th class="text-center">Applicant Contact</th>
+                <th class="text-center">Applicant Experience</th>
+                <th class="text-center">Applicant Availability</th>
             </tr>
         </thead>
         <tbody>

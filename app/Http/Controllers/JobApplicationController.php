@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\JobApplication;
+use App\Models\job;
 use App\Http\Requests\StoreJobApplicationRequest;
 use App\Http\Requests\UpdateJobApplicationRequest;
 
@@ -15,8 +16,16 @@ class JobApplicationController extends Controller
      */
     public function index()
     {
-        $jobapplications = JobApplication::all()->where('user_id','=',auth()->user()->id);
-        return view('livewire.dashboard-my-jobs')->with('item',$jobapplications);
+        $jobs = job::all()->where('user_id',auth()->user()->id);
+        $j = [];
+        foreach ($jobs as $key => $value) {
+            if ($key == 'id') {
+                array_push($j,$key);
+            }
+        }
+        $jobapplications = JobApplication::all()->whereIn('jobid',$j);
+        // return $jobapplications;
+        return view('livewire.dashboard-my-job-applications')->with('item',$jobapplications);
     }
 
     /**

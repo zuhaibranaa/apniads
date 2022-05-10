@@ -57,17 +57,9 @@ Route::middleware('auth')->get('/dashboard/pending-ads', function () {
 });
 Route::middleware('auth')->get('/dashboard/delivered-orders', function () {
     if(auth()->user()->is_admin){
-        $ads = App\Models\Ad::all();
-        $count = 0;
-        foreach ($ads as $ad) {
-            if ($ad['status'] == 0) {
-                $count++;
-            }
-        }
+        $ads = App\Models\Order::all()->where('status',1);
         return view('livewire.dashboard-delivered-orders')
-        ->with('ads',$ads)
-        ->with('user', auth()->user())
-        ->with('count', $count);
+        ->with('ads',$ads);
     }
 });
 Route::middleware('auth')->get('/dashboard/active-orders', function () {

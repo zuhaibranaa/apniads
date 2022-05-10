@@ -36,17 +36,17 @@
                             <ul class="list-inline justify-content-center">
                                 <li class="list-inline-item">
                                     <a data-toggle="tooltip" data-placement="top" title="view" class="view"
-                                        href="{{ url('ad/' . $ad['id']) }}">
+                                        href="{{ url('job/' . $ad['id']) }}">
                                         <i class="fa fa-eye"></i>
                                     </a>
                                 </li>
                                 <li class="list-inline-item">
                                     <a class="edit" data-toggle="tooltip" data-placement="top" title="Edit"
-                                        href="{{url('ad/'.$ad->id.'/edit')}}">
+                                        href="{{url('job/'.$ad->id.'/edit')}}">
                                         <i class="fa fa-pencil"></i>
                                     </a>
                                 </li>
-                                <form id="delete-{{ $ad['id'] }}" action="{{ url('ad/' . $ad['id']) }}"
+                                <form id="delete-{{ $ad['id'] }}" action="{{ url('job/' . $ad['id']) }}"
                                     method="POST">
                                     @csrf
                                     @method('DELETE')
