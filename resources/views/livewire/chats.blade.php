@@ -332,14 +332,7 @@
                         <form action="{{ url('chat') }}" method="post" id="newMessageForm">
                             @csrf
                             <input type="hidden" name="from_user" value="{{ auth()->user()->id }}">
-                            <input type="hidden" name="to_user" value="
-                            @php
-                            try {
-                                echo $_COOKIE['val'];
-                            } catch (\Throwable $th) {
-                                //throw $th;
-                            }
-                            @endphp">
+                            <input type="hidden" name="to_user" value="{{isset($_COOKIE['val']) ? $_COOKIE['val']:null}}">
                         </form>
                     </div>
                 </div>
@@ -355,26 +348,29 @@
         document.getElementsByName('user_name')[0].textContent = document.getElementsByClassName(
             'li active')[0].children[1].children[0].textContent;
         let innerTextContents = `@foreach ($chats as $message)
+        @if (isset($_COOKIE['val']))
             @if ($message->from_user == $_COOKIE["val"] || $message->to_user == $_COOKIE["val"])
-            @if ($message->from_user == auth()->user()->id)
-                <li class="clearfix">
-                    <div class="message-data">
-                        <span class="message-data-time">{{ $message->created_at }}</span>
-                    </div>
-                    <div class="message my-message">{{ $message->content }}</div>
-                </li>
-            @else
-                <li class="clearfix">
-                    <div class="message-data text-right">
-                        <span class="message-data-time">{{ $message->created_at }}</span>
-                        <img src="${document.getElementsByClassName('li active')[0].children[0]
-                    .src}" alt="avatar">
-                    </div>
-                    <div class="message other-message float-right"> {{ $message->content }}
-                    </div>
-                </li>
+                @if ($message->from_user == auth()->user()->id)
+                    <li class="clearfix">
+                        <div class="message-data">
+                            <span class="message-data-time">{{ $message->created_at }}</span>
+                        </div>
+                        <div class="message my-message">{{ $message->content }}</div>
+                    </li>
+                @else
+                    <li class="clearfix">
+                        <div class="message-data text-right">
+                            <span class="message-data-time">{{ $message->created_at }}</span>
+                            <img src="${document.getElementsByClassName('li active')[0].children[0]
+                        .src}" alt="avatar">
+                        </div>
+                        <div class="message other-message float-right"> {{ $message->content }}
+                        </div>
+                    </li>
+                @endif
             @endif
-            @endif
+        @endif
+
         @endforeach`;
         document.getElementById('messages_content').innerHTML = innerTextContents;
         for (let obj of allChats) {

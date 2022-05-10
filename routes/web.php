@@ -90,7 +90,7 @@ Route::middleware('auth')->resource('/job', JobController::class);
 Route::middleware('auth')->resource('/job-application', JobApplicationController::class);
 Route::middleware('auth')->resource('/cart', CartController::class);
 Route::middleware('auth')->resource('/order', OrderController::class);
-Route::resource('/ad', AdController::class);
+Route::middleware('auth')->resource('/ad', AdController::class);
 Route::get('/search', [AdController::class, 'search'])->name('search');
 Route::middleware('auth')->resource('/chat', ChatController::class);
 Route::resource('/category', CategoryController::class);

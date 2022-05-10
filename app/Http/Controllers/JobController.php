@@ -16,7 +16,7 @@ class JobController extends Controller
     public function index()
     {
         $jobs = job::all()->where('user_id','=',auth()->user()->id);
-        return view('livewire.dashboard-my-jobs')->with('item',$jobs);
+        return view('livewire.dashboard-my-jobs')->with('ads',$jobs);
     }
     /**
      * Store a newly created resource in storage.

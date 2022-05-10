@@ -1,33 +1,59 @@
 @extends('livewire.layouts.dashboard')
 @section('data')
-    <h3 class="widget-header">My WishList</h3>
+    <h3 class="widget-header">My Jobs</h3>
     <table class="table table-responsive product-dashboard-table">
         <thead>
             <tr>
-                <th>Item Name</th>
-                <th class="text-center">Item Price</th>
-                <th class="text-center">Actions</th>
+                <th>Image</th>
+                <th>Job Title</th>
+                <th class="text-center">Category</th>
+                <th class="text-center">Action</th>
             </tr>
         </thead>
         <tbody>
-            @if ($item)
-                @foreach ($item as $wish)
+            @foreach ($ads as $ad)
+                <tr>
                     @php
-                        $ad = \App\Models\Ad::find($wish->item_id);
+                        $arr = trim($ad['images'], '[');
+                        $arr = trim($arr, ']');
+                        $r = explode(',', $arr);
                     @endphp
-                    <td class="product-category"><span class="categories ">{{ $ad['title'] }}</span></td>
-                    <td class="product-category"><span class="categories">{{ $ad['price'] }}</span></td>
+                    <td class="product-thumb">
+                        <img width="80px" height="auto" src={{ asset('images/' . Str::substr($r[0], 1, -1)) }}
+                            alt="image description">
+                    </td>
+                    <td class="product-details">
+                        <h3 class="title">{{ $ad['title'] }}</h3>
+                        <span class="add-id"><strong>Ad ID:</strong> {{ $ad['id'] }}</span>
+                        <span><strong>Posted on: </strong><time>{{ $ad['created_at'] }}</time> </span>
+                        <span class="status active"><strong>Status</strong>{{ $ad['status'] }}</span>
+                        <span class="location"><strong>Location</strong>{{ $ad['location'] }}</span>
+                    </td>
+                    <td class="product-category"><span
+                            class="categories">{{ App\Models\Category::find($ad['category_id'])['name'] }}</span></td>
                     <td class="action" data-title="Action">
                         <div class="">
                             <ul class="list-inline justify-content-center">
-                                <form id="delete-{{ $wish->id }}" action="{{ url('wishlist/' . $wish->id) }}"
+                                <li class="list-inline-item">
+                                    <a data-toggle="tooltip" data-placement="top" title="view" class="view"
+                                        href="{{ url('ad/' . $ad['id']) }}">
+                                        <i class="fa fa-eye"></i>
+                                    </a>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a class="edit" data-toggle="tooltip" data-placement="top" title="Edit"
+                                        href="{{url('ad/'.$ad->id.'/edit')}}">
+                                        <i class="fa fa-pencil"></i>
+                                    </a>
+                                </li>
+                                <form id="delete-{{ $ad['id'] }}" action="{{ url('ad/' . $ad['id']) }}"
                                     method="POST">
                                     @csrf
                                     @method('DELETE')
                                 </form>
                                 <li class="list-inline-item">
                                     <a class="delete"
-                                        onclick="document.getElementById('delete-{{ $wish->id }}').submit()"
+                                        onclick="document.getElementById('delete-{{ $ad['id'] }}').submit()"
                                         data-toggle="tooltip" data-placement="top" title="Delete">
                                         <i class="fa fa-trash"></i>
                                     </a>
@@ -35,8 +61,8 @@
                             </ul>
                         </div>
                     </td>
-                @endforeach
-            @endif
+                </tr>
+            @endforeach
         </tbody>
     </table>
 @endsection

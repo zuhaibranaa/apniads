@@ -26,7 +26,7 @@
                         <h3 class="title">{{ $ad['title'] }}</h3>
                         <span class="add-id"><strong>Ad ID:</strong> {{ $ad['id'] }}</span>
                         <span><strong>Posted on: </strong><time>{{ $ad['created_at'] }}</time> </span>
-                        <span class="status active"><strong>Status</strong>{{ $ad['status'] }}</span>
+                        <span class="status {{ $ad['status'] == 0 ? 'pending':'active' }}"><strong>Status</strong>{{ $ad['status'] == 0 ? 'Pending':'Active' }}</span>
                         <span class="location"><strong>Location</strong>{{ $ad['location'] }}</span>
                     </td>
                     <td class="product-category"><span
