@@ -42,13 +42,9 @@ Route::middleware('auth')->get('/dashboard/all-ads', function () {
 });
 Route::middleware('auth')->get('/dashboard/pending-ads', function () {
     if(auth()->user()->is_admin){
-        $ads = App\Models\Ad::all();
-        $count = 0;
-        foreach ($ads as $ad) {
-            if ($ad['status'] == 0) {
-                $count++;
-            }
-        }
+        $ads = App\Models\Ad::all()
+        ->where('status','=',0);
+        $count = count($ads);
         return view('livewire.dashboard-pending-ads')
         ->with('ads',$ads)
         ->with('user', auth()->user())

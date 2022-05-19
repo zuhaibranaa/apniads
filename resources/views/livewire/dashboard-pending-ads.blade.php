@@ -12,6 +12,15 @@
         </thead>
         <tbody>
             @foreach ($ads as $ad)
+
+            <form id="approve-{{ $ad['id'] }}" action="{{ url('ad/' . $ad['id']) }}" method="POST">
+                @csrf
+                @method('PUT')
+            </form>
+            <form id="delete-{{ $ad['id'] }}" action="{{ url('ad/' . $ad['id']) }}" method="POST">
+                @csrf
+                @method('DELETE')
+            </form>
                 <tr>
 
                     <td class="product-thumb">
@@ -22,7 +31,7 @@
                         <h3 class="title">{{ $ad['title'] }}</h3>
                         <span class="add-id"><strong>Ad ID:</strong> {{ $ad['id'] }}</span>
                         <span><strong>Posted on: </strong><time>{{ $ad['created_at'] }}</time> </span>
-                        <span class="status active"><strong>Status</strong>{{ $ad['status'] }}</span>
+                        <span class="status active"><strong>Status</strong>{{ $ad['status'] ? 'Active':'Pending' }}</span>
                         <span class="location"><strong>Location</strong>{{ $ad['location'] }}</span>
                     </td>
                     <td class="product-category"><span
@@ -37,15 +46,11 @@
                                     </a>
                                 </li>
                                 <li class="list-inline-item">
-                                    <a class="edit" data-toggle="tooltip" data-placement="top" title="Edit"
-                                        href="">
-                                        <i class="fa fa-pencil"></i>
+                                    <a class="edit" data-toggle="tooltip" data-placement="top" title="Approve"
+                                        onclick="document.getElementById('approve-{{ $ad['id'] }}').submit()">
+                                        <i class="fa fa-check-circle"></i>
                                     </a>
                                 </li>
-                                <form id="delete-{{ $ad['id'] }}" action="{{ url('ad/' . $ad['id']) }}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                </form>
                                 <li class="list-inline-item">
                                     <a class="delete"
                                         onclick="document.getElementById('delete-{{ $ad['id'] }}').submit()"

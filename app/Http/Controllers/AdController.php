@@ -116,9 +116,9 @@ class AdController extends Controller
      */
     public function update(Request $request,Ad $ad)
     {
-        if (auth()->user()->is_admin && $ad->seller_id == auth()->user()->id) {
+        if (auth()->user()->is_admin) {
             $ad->status = 1;
-        }else{
+        }else if(auth()->user()->is_admin && $ad['seller_id'] == auth()->user()->id){
             $ad->title = $request->title;
             $ad->description = $request->description;
             $ad->brand = $request->brand;
