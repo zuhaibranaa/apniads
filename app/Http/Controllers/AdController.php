@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Ad;
+use App\Models\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -93,7 +94,10 @@ class AdController extends Controller
      */
     public function show(Ad $ad)
     {
-        return view('livewire.single-ad')->with('ad', $ad);
+        $comments = Comment::all()
+        ->where('is_ad','=',1)
+        ->where('listing_id','=',$ad['id']);
+        return view('livewire.single-ad')->with('ad', $ad)->with('comments',$comments);
     }
 
     /**

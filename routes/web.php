@@ -9,6 +9,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\JobController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\JobApplicationController;
 /*
 |--------------------------------------------------------------------------
@@ -79,6 +80,7 @@ Route::middleware('auth')->resource('/job-application', JobApplicationController
 Route::middleware('auth')->resource('/cart', CartController::class);
 Route::middleware('auth')->resource('/order', OrderController::class);
 Route::middleware('auth')->resource('/ad', AdController::class);
+Route::middleware('auth')->resource('/comment', CommentController::class);
 Route::get('/search', [AdController::class, 'search'])->name('search');
 Route::middleware('auth')->resource('/chat', ChatController::class);
 Route::resource('/category', CategoryController::class);

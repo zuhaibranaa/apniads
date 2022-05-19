@@ -1,4 +1,86 @@
 @extends('layouts.app')
+@section('css')
+<style>
+body {
+    background-color: #f7f6f6
+}
+
+.card {
+
+    border: none;
+    box-shadow: 5px 6px 6px 2px #e9ecef;
+    border-radius: 4px;
+}
+
+
+.dots{
+
+    height: 4px;
+  width: 4px;
+  margin-bottom: 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.badge{
+
+        padding: 7px;
+        padding-right: 9px;
+    padding-left: 16px;
+    box-shadow: 5px 6px 6px 2px #e9ecef;
+}
+
+.user-img{
+
+    margin-top: 4px;
+}
+
+.check-icon{
+
+    font-size: 17px;
+    color: #c3bfbf;
+    top: 1px;
+    position: relative;
+    margin-left: 3px;
+}
+
+.form-check-input{
+    margin-top: 6px;
+    margin-left: -24px !important;
+    cursor: pointer;
+}
+
+
+.form-check-input:focus{
+    box-shadow: none;
+}
+
+
+.icons i{
+
+    margin-left: 8px;
+}
+.reply{
+
+    margin-left: 12px;
+}
+
+.reply small{
+
+    color: #b7b4b4;
+
+}
+
+
+.reply small:hover{
+
+    color: green;
+    cursor: pointer;
+
+}
+</style>
+@endsection
 @section('content')
     <section class="page-search">
     </section>
@@ -198,4 +280,72 @@
             </div>
         </div>
     </div>
+
+    <div class="container mt-5">
+
+        <div class="row  d-flex justify-content-center">
+
+            <div class="col-md-8">
+
+                <div class="headings d-flex justify-content-between align-items-center mb-3">
+                    <h5>User Comments</h5>
+                </div>
+                @foreach ($comments as $comment)
+                <div class="card p-3">
+
+                    <div class="d-flex justify-content-between align-items-center">
+
+                  <div class="user d-flex flex-row align-items-center">
+
+                    <img src="{{asset('images/' . App\Models\User::find($comment['from'])['image'])}}" width="30" class="user-img rounded-circle mr-2">
+                    <span><small class="font-weight-bold text-primary">{{(App\Models\User::find($comment['from'])['name'])}}</small> <small class="font-weight-bold">{{$comment['text']}}</small></span>
+
+                  </div>
+
+
+                  <small>@php $date = new DateTime($comment['created_at'])@endphp {{date_format($date,'l jS F Y \a\t g:i A' )}}</small>
+                  </div>
+
+
+                  <div class="action d-flex justify-content-between mt-2 align-items-center">
+                    @if(auth()->user()->id == $comment['from'])
+                    <div class="reply px-4">
+                        <form id="delete-{{$comment['id']}}" action="{{url('comment/'.$comment['id'])}}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <script>
+                                function delete_{{$comment['id']}}() {
+                                    document.getElementById("delete-{{$comment['id']}}").submit()
+                                }
+                            </script>
+                            <small onclick="delete_{{$comment['id']}}()">Remove</small>
+
+                        </form>
+                    </div>
+                    @endif
+                  </div>
+
+
+
+                </div>
+                @endforeach
+                <form action="{{url('comment')}}" method="post">
+                    @csrf
+                    <div class="card p-3">
+                        <div class="form-group">
+                            <input type="hidden" name="is_ad" value="1">
+                            <input type="hidden" name="listing_id" value="{{$ad['id']}}">
+                           <textarea name="text" class="form-control" placeholder="Type Your Comment Here"></textarea>
+                          </div>
+                          <div class="form-group">
+                            <input type="submit" class="btn btn-primary" value="Submit">
+                          </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+    <br/>
 @endsection

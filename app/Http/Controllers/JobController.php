@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\job;
+use App\Models\Comment;
 use App\Http\Requests\StorejobRequest;
 use App\Http\Requests\UpdatejobRequest;
 
@@ -59,7 +60,10 @@ class JobController extends Controller
      */
     public function show(job $job)
     {
-        return view('livewire.single-job')->with('ad',$job);
+        $comments = Comment::all()
+        ->where('is_ad','=',0)
+        ->where('listing_id','=',$job['id']);
+        return view('livewire.single-job')->with('ad',$job)->with('comments',$comments);
     }
 
     /**
