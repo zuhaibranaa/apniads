@@ -325,7 +325,17 @@
                   <div class="action d-flex justify-content-between mt-2 align-items-center">
                     @if(auth()->user()->id == $comment['from'])
                     <div class="reply px-4">
-                        <small>Remove</small>
+                        <form id="delete-{{$comment['id']}}" action="{{url('comment/'.$comment['id'])}}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <script>
+                                function delete_{{$comment['id']}}() {
+                                    document.getElementById("delete-{{$comment['id']}}").submit()
+                                }
+                            </script>
+                            <small onclick="delete_{{$comment['id']}}()">Remove</small>
+
+                        </form>
                     </div>
                     @endif
                   </div>
