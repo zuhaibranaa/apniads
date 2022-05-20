@@ -27,7 +27,11 @@ class CartController extends Controller
      */
     public function store(StorecartRequest $request)
     {
-        return $request;
+        $cart = new cart();
+        $cart['user_id'] = auth()->user()->id;
+        $cart['item_id'] = $request['item_id'];
+        $cart->save();
+        return redirect('cart');
     }
 
     /**

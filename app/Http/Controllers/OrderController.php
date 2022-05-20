@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\order;
+use App\Models\cart;
+use App\Models\Ad;
 use App\Http\Requests\StoreorderRequest;
 use App\Http\Requests\UpdateorderRequest;
 
@@ -26,7 +28,7 @@ class OrderController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -37,7 +39,21 @@ class OrderController extends Controller
      */
     public function store(StoreorderRequest $request)
     {
-        //
+        $cartItems = cart::all()->where('user_id','=',auth()->user()->id);
+        $orderItem = [];
+        $totalPrice = 0;
+        foreach ($cartItems as $cartItem) {
+            array_push($orderItem,$cartItem['item_id']);
+            array_push($totalPrice,Ad::find($cartItem['item_id'])['price']);
+        }
+
+        $order = new order();
+        $order['user_id'] = auth()->user()->id;
+        $order['item_ids'] = $orderItem;
+        $order['total_price'] = $totalPrice;
+        $order['order_date'] = now();
+        $order['status'] = false;
+        return $order;
     }
 
     /**
