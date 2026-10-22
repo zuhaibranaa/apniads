@@ -52,7 +52,7 @@
     <script src="{{ asset('css/plugins/fancybox/jquery.fancybox.pack.js') }}"></script>
     <script src="{{ asset('css/plugins/smoothscroll/SmoothScroll.min.js') }}"></script>
     <!-- google map -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcABaamniA6OL5YvYSpB3pFMNrXwXnLwU&libraries=places">
+    <script src="https://maps.googleapis.com/maps/api/js?key={{ config('services.google_maps.key') }}&libraries=places">
     </script>
     <script src="{{ asset('css/plugins/google-map/gmap.js') }}"></script>
     <script src="{{ asset('js/script.js') }}"></script>
